@@ -3,6 +3,7 @@ package com.elearning.elearning.student;
 
 import com.elearning.elearning.account.Account;
 import com.elearning.elearning.account.AccountRepository;
+import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.common.PageResponse;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
@@ -39,33 +40,30 @@ public class StudentService implements IStudentService {
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
     private final LocalService localService;
-    private final DocumentService imageService;
+    private final DocumentService documentService;
+    private final CommService commService;
     private final ModelMapper modelMapper;
     private final VerificationService verificationService;
 
 
 
     /**
-     * @param request is the body of My addStudent Request
+     * @param student is the body of My addStudent Request
      */
     @Override
-    public void addStudent(MultipartFile file, StudentRequest request) throws MessagingException, IOException {
+    public void addStudent(MultipartFile cv,MultipartFile degree, Student student) throws MessagingException, IOException {
         /**
          *  check Student to save ;
          */
-        Optional.ofNullable(accountRepository.findByPhoneOrMailIgnoreCase(request.getPhone(), request.getMail())).ifPresent(
+        Optional.ofNullable(accountRepository.findByPhoneOrMailIgnoreCase(student.getPhone(), student.getMail())).ifPresent(
                 (accountEntity) -> {
                     throw new AlreadyExistException(localService.getMessage(USER_EXIT));});
-        Student student = modelMapper.map(request, Student.class);
         Account account = modelMapper.map(student, Account.class);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setPassword(passwordEncoder.encode(commService.password()));
         account.setPermission(STUDENT);
         accountRepository.save(account);
         studentRepository.save(student);
-        imageService.uploadCV(file, account);
-        /**
-         * generate Activation code for account and send
-         */
+        documentService.uploadCV(cv, account);
         verificationService.verificationCode(account);
     }
 

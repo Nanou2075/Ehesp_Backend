@@ -35,10 +35,9 @@ public abstract class UserBaseEntity implements UserDetails {
     @Column(nullable = false,unique = true)
     private String mail;
 
-    @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = false)
+
     private String password;
 
     private String fullName;

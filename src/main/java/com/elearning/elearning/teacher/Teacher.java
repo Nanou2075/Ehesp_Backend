@@ -15,9 +15,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Entity
 public class Teacher extends UserBaseEntity {
-    private int hour;
-    private int session;
-    private int amount;
+    private String title;
+    private String degree;
 
 
 }

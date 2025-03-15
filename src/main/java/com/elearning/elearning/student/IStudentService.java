@@ -11,7 +11,7 @@ import java.io.IOException;
 @Transactional
 @Service
 public interface IStudentService {
-    void addStudent(MultipartFile file,StudentRequest student) throws MessagingException, IOException;
+    void addStudent(MultipartFile cv,MultipartFile degree,Student student) throws MessagingException, IOException;
     Student getStudentById(String id );
     void updateStudent(String id, StudentUpdate customer);
     void deleteStudentById (String id);

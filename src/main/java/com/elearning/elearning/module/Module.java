@@ -1,6 +1,7 @@
 package com.elearning.elearning.module;
 
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -20,4 +21,8 @@ public class Module extends BaseEntity {
     private String name;
     @ManyToOne
     private Training training;
+    @ManyToOne
+    private Teacher coordinator;
+    @ManyToOne
+    private Teacher teacher;
 }

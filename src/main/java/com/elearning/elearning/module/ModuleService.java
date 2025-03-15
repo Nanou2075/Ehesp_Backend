@@ -66,6 +66,8 @@ public class ModuleService implements IModuleService {
                     moduleRepository.save(local);},
                  ()-> {throw new NotFoundException(NO,localService.getMessage(TRAINING_NOT_FOUND));});}
 
+
+
     /**
      *
      * @param id permit to get the Module
@@ -76,6 +78,7 @@ public class ModuleService implements IModuleService {
         return moduleRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND)));
     }
+
 
     /**
      *

@@ -4,9 +4,7 @@ import com.elearning.elearning.common.BaseEntity;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +29,6 @@ public class Memory extends BaseEntity {
     private Teacher frame;
     @OneToMany
     private Set<Teacher> jury;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL ,orphanRemoval = true)
     private Student student;
 }
