@@ -1,14 +1,22 @@
 package com.elearning.elearning.account;
 
 
+import com.elearning.elearning.admin.Admin;
+import com.elearning.elearning.admin.AdminRepository;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.exception.enums.Permission;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.security.authentication.AuthenticationService;
+import com.elearning.elearning.student.Student;
+import com.elearning.elearning.student.StudentRepository;
+import com.elearning.elearning.teacher.Teacher;
+import com.elearning.elearning.teacher.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import java.util.*;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.exception.Response.Security.OK;
@@ -20,7 +28,9 @@ import static com.elearning.elearning.messages.AccountMessage.USER_NOT_FOUND;
 public class AccountController implements AccountResource{
     private final AccountRepository accountRepository;
     private final LocalService localService;
-    private final AuthenticationService authenticationService;
+    private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
+    private final AdminRepository adminRepository;
 
 
 
@@ -45,6 +55,18 @@ public class AccountController implements AccountResource{
     public Response getPermission() {
         return new Response(OK, Permission.values());
     }
+
+    @Override
+    public Response getStatistical() {
+        Map<String, Object> values = new HashMap<>();
+        values.put(Admin.class.getName(), adminRepository.findAll());
+        values.put(Teacher.class.getName(), teacherRepository.findAll());
+        values.put(String.class.getName(), studentRepository.findAllByAvailableTrue());
+        return new Response(OK,values);
+    }
+
+
+
 
     private AccountResponse getAccountResponse(Account account) {
         return AccountResponse.builder()
