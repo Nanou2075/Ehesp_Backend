@@ -5,6 +5,8 @@ import com.elearning.elearning.account.Account;
 import com.elearning.elearning.account.AccountRepository;
 import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.common.PageResponse;
+import com.elearning.elearning.degree.Degree;
+import com.elearning.elearning.degree.DegreeService;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
@@ -44,6 +46,7 @@ public class StudentService implements IStudentService {
     private final AccountRepository accountRepository;
     private final LocalService localService;
     private final DocumentService documentService;
+    private final DegreeService degreeService;
     private final CommService commService;
     private final ModelMapper modelMapper;
     private final VerificationService verificationService;
@@ -67,6 +70,7 @@ public class StudentService implements IStudentService {
         accountRepository.save(account);
         studentRepository.save(student);
         documentService.uploadCV(cv, account);
+        degreeService.uploadDegree(degree, account);
     }
 
 

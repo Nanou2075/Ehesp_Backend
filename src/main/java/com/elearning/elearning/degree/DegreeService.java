@@ -119,7 +119,7 @@ public class DegreeService implements IDegreeService {
                     Degree fileSaved = degreeRepository.save(Degree.builder()
                             .fileName(file.getOriginalFilename())
                             .fileType(file.getContentType())
-                            .account( service.currentAccount())
+                            .account(account)
                             .filePath(filePath).build());
                     sendToFolder(file,filePath);
                     fileSaved.setUrl(URL_DOCUMENT+fileSaved.getId());

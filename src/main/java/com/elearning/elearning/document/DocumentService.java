@@ -165,7 +165,7 @@ public class DocumentService implements IDocumentService {
                     Document fileSaved = documentRepository.save(Document.builder()
                             .fileName(file.getOriginalFilename())
                             .fileType(file.getContentType())
-                            .account( service.currentAccount())
+                            .account(account)
                             .filePath(filePath).build());
                     sendToFolder(file,filePath);
                     fileSaved.setUrl(URL_DOCUMENT+fileSaved.getId());
