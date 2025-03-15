@@ -7,8 +7,10 @@ import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.common.PageResponse;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
+import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.document.DocumentService;
+import com.elearning.elearning.training.Training;
 import com.elearning.elearning.verification.VerificationService;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
+import static com.elearning.elearning.exception.Response.Security.OK;
 import static com.elearning.elearning.exception.enums.Permission.STUDENT;
 import static com.elearning.elearning.messages.AccountMessage.*;
 
@@ -46,7 +49,6 @@ public class StudentService implements IStudentService {
     private final VerificationService verificationService;
 
 
-
     /**
      * @param student is the body of My addStudent Request
      */
@@ -57,7 +59,8 @@ public class StudentService implements IStudentService {
          */
         Optional.ofNullable(accountRepository.findByPhoneOrMailIgnoreCase(student.getPhone(), student.getMail())).ifPresent(
                 (accountEntity) -> {
-                    throw new AlreadyExistException(localService.getMessage(USER_EXIT));});
+                    throw new AlreadyExistException(localService.getMessage(USER_EXIT));
+                });
         Account account = modelMapper.map(student, Account.class);
         account.setPassword(passwordEncoder.encode(commService.password()));
         account.setPermission(STUDENT);
@@ -69,7 +72,6 @@ public class StudentService implements IStudentService {
 
 
     /**
-     *
      * @param id is the param for our request to get Student
      * @return customer is the value return
      */
@@ -77,12 +79,12 @@ public class StudentService implements IStudentService {
     @Override
     public Student getStudentById(String id) {
         return studentRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND)));
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND)));
     }
 
 
     /**
-     * @param id             is the param for our request to get Student
+     * @param id            is the param for our request to get Student
      * @param studentUpdate the new data for update the existingStudent
      */
     @Override
@@ -95,9 +97,8 @@ public class StudentService implements IStudentService {
 
 
     /**
-     *
      * @param existingStudentEntity is the value will be updated by new data
-     * @param studentUpdate the new data for update the existingStudentEntity
+     * @param studentUpdate         the new data for update the existingStudentEntity
      * @return the customer is the return value
      */
 
@@ -110,20 +111,18 @@ public class StudentService implements IStudentService {
     }
 
     /**
-     *
-     * @param id  is the param for our request to get Student for delete
+     * @param id is the param for our request to get Student for delete
      */
     @Override
     public void deleteStudentById(String id) {
-         studentRepository.findById(id)
-                 .ifPresentOrElse(studentRepository::delete, () -> {
+        studentRepository.findById(id)
+                .ifPresentOrElse(studentRepository::delete, () -> {
                     throw new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND));
-                 });
+                });
 
     }
 
     /**
-     *
      * @param page the number of page
      * @param size the number per page
      * @return PageResponse is value i will return content size value of page number
@@ -132,9 +131,10 @@ public class StudentService implements IStudentService {
     @Override
     public PageResponse getAllStudent(int page, int size) {
         List<Student> all = studentRepository.findAllByAvailableTrue();
-       if(all.isEmpty()){
-           throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));
+        if (all.isEmpty()) {
+            throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));
         }
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").ascending());
         Page<Student> customers = studentRepository.findAllByAvailableTrue(pageable);
         return PageResponse.builder()
@@ -151,5 +151,13 @@ public class StudentService implements IStudentService {
 
 
 
+    @Override
+    public Response getAllStudentByTraining(Training training) {
+        List<Student> students = studentRepository.findAllByTraining(training);
+        if (students.isEmpty()) {
+            throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));
+        }
+       return new Response(OK,students);
+    }
 
 }

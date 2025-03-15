@@ -1,6 +1,8 @@
 package com.elearning.elearning.student;
 
 import com.elearning.elearning.common.PageResponse;
+import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.training.Training;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -17,4 +19,5 @@ public interface IStudentService {
     void deleteStudentById (String id);
     PageResponse getAllStudent(int page , int size);
 
+    Response getAllStudentByTraining(Training training);
 }

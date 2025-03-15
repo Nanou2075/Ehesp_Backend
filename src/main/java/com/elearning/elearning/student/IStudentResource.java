@@ -1,6 +1,7 @@
 package com.elearning.elearning.student;
 
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.training.Training;
 import jakarta.mail.MessagingException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,8 @@ public interface IStudentResource {
     @GetMapping("all")
     Response getAllStudent(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
                     @RequestParam(name = "size", defaultValue = "10", required = false) int size);
+
+    @PostMapping("training")
+    Response getAllStudentByTraining( @RequestBody Training training);
 
 }
