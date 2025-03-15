@@ -1,6 +1,7 @@
 package com.elearning.elearning.notes;
 
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.module.Module;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
@@ -20,15 +21,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Note extends BaseEntity {
-    private LocalDate date;
-    private LocalDate time;
-    private String content;
     @ManyToOne
-    private Training training;
+    private Module training;
     @ManyToOne
-    private Teacher frame;
-    @OneToMany
-    private Set<Teacher> jury;
-    @OneToOne(cascade = CascadeType.ALL ,orphanRemoval = true)
     private Student student;
+    private String remark;
+    private String homework_grade;
+    private String exam_grade;
+
 }
