@@ -1,6 +1,7 @@
 package com.elearning.elearning.training;
 
 
+import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,11 @@ private final LocalService localService;
     public Response removeTraining(String id) {
         trainingService.removeTraining(id);
         return new Response(OK,localService.getMessage(TRAINING_DELETE));
+    }
+
+    @Override
+    public Response getTrainingByDomain(Domain domain) {
+        return new Response(OK, trainingService.getAllByDomain(domain));
     }
 
     @Override

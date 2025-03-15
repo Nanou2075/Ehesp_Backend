@@ -1,6 +1,7 @@
 package com.elearning.elearning.training;
 
 
+import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
@@ -94,4 +95,16 @@ public class TrainingService implements ITrainingService {
         });
         return trainingResponseList;
     }
+
+
+    @Override
+    public Set<TrainingResponse> getAllByDomain(Domain domain) {
+        if (trainingRepository.findAllByDomain(domain).isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        return convertToResponse(Optional.of(trainingRepository.findAllByDomain(domain))
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+    }
 }
+
+
+

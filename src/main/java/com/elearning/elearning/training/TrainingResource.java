@@ -1,5 +1,6 @@
 package com.elearning.elearning.training;
 
+import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ public interface TrainingResource {
 
     @DeleteMapping("{id}")
     Response removeTraining(@PathVariable String id );
+
+    @PostMapping("domain")
+    Response getTrainingByDomain(@RequestBody Domain domain);
 
     @GetMapping("{id}")
     Response getTraining(@PathVariable String id );

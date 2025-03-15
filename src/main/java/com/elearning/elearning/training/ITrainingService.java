@@ -1,5 +1,6 @@
 package com.elearning.elearning.training;
 
+import com.elearning.elearning.domain.Domain;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +14,6 @@ public interface ITrainingService {
     Training getTraining(String id);
     void removeTraining(String id);
     Set<TrainingResponse> getAll();
+
+    Set<TrainingResponse> getAllByDomain(Domain domain);
 }
