@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #337ab7;
+        }
+        p {
+            font-size: 16px;
+        }
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+        b {
+            color: #181717;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<img src='cid:logo'/>
+<h1>Bienvenue dans Notre Communauté !</h1>
+<p>Merci de vous être inscrit. Votre inscription a étée acceptéé avec succès.</p>
+<p> <b>Attention</b> :<span class="red-text">Veillez saisir ce code : <b><span th:text="${code}" ></span></b> a fin  d'activer votre compte.</span></p>
+<p>Votre nom d'utilisateur est : <b><span th:text="${username}"></span></b></p>
+<p>Votre mot de passe est : <b><span th:text="${password}"></span></b></p>
+<p> Lien de la plateforme:<span> <a href="http://localhost:4200/"> cliquez ici</a></span></p>
+<p><span  class="red-text">Nous vous prions de changer votre mot de passe après votre 1ᵉʳᵉ connexion.</span></p>
+</body>
+</html>

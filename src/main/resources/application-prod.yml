@@ -1,0 +1,40 @@
+#ServeurConfig
+  server:
+    port: 9091
+    servlet:
+      context-path: /api
+      encoding:
+        charset: UTF-8
+        force-response: true
+    tomcat:
+      threads:
+        max: 5550
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/e-learning
+      username: postgres
+      password: azerty
+      driver-class-name: org.postgresql.Driver
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+      database: POSTGRESQL
+
+
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 1GB
+        max-request-size: 1GB
+    web:
+      resources:
+        add-mappings: false
+
+
+  rsa:
+    private-key: classpath:certs/privateKey.pem
+    public-key: classpath:certs/publicKey.pem
+
+
+

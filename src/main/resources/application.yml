@@ -1,0 +1,6 @@
+Spring:
+  profiles:
+    active: dev
+
+
+

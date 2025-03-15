@@ -1,0 +1,72 @@
+#ServeurConfig
+  server:
+    port: 9091
+    servlet:
+      context-path: /api
+#      encoding:
+#        charset: UTF-8
+#        force-response: false
+    tomcat:
+      threads:
+        max: 5550
+        min-spare: 10
+  spring:
+    main:
+      allow-circular-references: true
+    datasource:
+      url: jdbc:postgresql://localhost:5432/e-learning
+      username: postgres
+      password: root
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        allow-pool-suspension: true
+        maximum-pool-size: 400
+        minimum-idle: 100
+        connection-timeout: 2000
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+
+      database: POSTGRESQL
+
+      properties:
+        cache:
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+          ehcache:
+            config: classpath:ehcache.xml
+    threads:
+      virtual:
+        enabled: true
+
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: nanouroukou2075@gmail.com
+      password: xbxckihdbacrkdnj
+      properties:
+        mail:
+          smtp:
+            trust: "*"
+          auth: true
+          starttls:
+            enabled: true
+          debug: true
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 10GB
+        max-request-size: 10GB
+    web:
+      resources:
+        add-mappings: false
+
+
+  rsa:
+    private-key: classpath:certs/privateKey.pem
+    public-key: classpath:certs/publicKey.pem
+
+
+

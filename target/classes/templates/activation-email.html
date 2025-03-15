@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .red-text{
+            color: red;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #337ab7;
+        }
+        p {
+            font-size: 16px;
+        }
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<img src='cid:logo'/>
+<h1>Bienvenue dans Notre Communauté !</h1>
+<p>Merci de vous être inscrit. Votre compte a été créé avec succès.</p>
+<p>Saisissez ce Code : <span th:text="${code}" class="red-text"></span>  pour activer votre Compte :</p>
+<p> Lien de la plateforme:<span class="red-text"> <a href="http://localhost:4200/"> cliquez ici</a></span></p>
+<p>Si vous n'avez pas créé ce compte, veuillez ignorer cet e-mail.</p>
+</body>
+</html>

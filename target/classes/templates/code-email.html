@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .red-text{
+            color: red;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #337ab7;
+        }
+        p {
+            font-size: 16px;
+        }
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<img src='cid:logo'/>
+<h1>Votre nouveau code d'activation</h1>
+<p>Vous avez demandé votre nouveau code d'activation.</p>
+<p>Saisissez ce Code : <span th:text="${code}" class="red-text"> </span>  pour réinitialiser votre mot de passe </p>
+<p> Lien de la plateforme:<span class="red-text"> <a href="http://localhost:4200/"> cliquez ici</a></span></p>
+<p>Sachez que  la validité de ce code est de <span class="red-text"> (24H)</span></p>
+
+</body>
+</html>
