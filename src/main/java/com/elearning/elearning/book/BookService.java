@@ -44,7 +44,7 @@ public class BookService implements IBookService {
         Path path = Path.of(FOLDER_BOOK_PATH);
         commService.folderChecking(path);
         files.forEach(file -> {
-            String filePath=path+file.getOriginalFilename();
+            String filePath=path+"/"+file.getOriginalFilename();
             Book bookSaved = bookRepository.save(Book.builder()
                     .fileName(file.getOriginalFilename())
                     .fileType(file.getContentType())

@@ -45,7 +45,7 @@ public class PodcastService implements IPodcastService {
         Path path = Path.of(FOLDER_PODCAST_PATH);
         commService.folderChecking(path);
         files.forEach(file -> {
-            String filePath=path+file.getOriginalFilename();
+            String filePath=path+"/"+file.getOriginalFilename();
             Podcast podcastSaved = podcastRepository.save(Podcast.builder()
                     .fileName(file.getOriginalFilename())
                     .fileType(file.getContentType())
@@ -96,7 +96,7 @@ public class PodcastService implements IPodcastService {
      */
 
     public boolean delete (String filename) throws IOException {
-        return new File(FOLDER_PODCAST_PATH + filename).delete();
+        return new File(FOLDER_PODCAST_PATH+"/"+ filename).delete();
     }
 
     /**
@@ -117,20 +117,7 @@ public class PodcastService implements IPodcastService {
 
 
 
-    /**
-     *
-     * @param id the file name to get in database
-     * @return
-     * @throws IOException
-     */
-    @Override
-    public byte[] getPodcast(String id) throws IOException {
-        Podcast file = podcastRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(NO,localService.getMessage(FILE_NOT_FOUND)));
-        String filePath=file.getFilePath();
-        return Files.readAllBytes(new File(filePath).toPath());
 
-    }
 
     /**
      *

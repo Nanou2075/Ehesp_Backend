@@ -80,7 +80,7 @@ public class DocumentService implements IDocumentService {
      */
 
     public boolean delete (String filename) throws IOException {
-     return new File(FOLDER_DOCUMENT_PATH + filename).delete();
+     return new File(FOLDER_DOCUMENT_PATH +"/"+ filename).delete();
     }
 
     /**

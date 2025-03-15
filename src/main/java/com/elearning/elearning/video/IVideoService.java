@@ -15,7 +15,6 @@ import java.util.List;
 public interface IVideoService {
     void uploadVideo (List<MultipartFile> files, Module module) throws IOException;
     void changeVideo(String idFile, MultipartFile file) throws IOException;
-    byte[]  getVideo(String id) throws IOException;
     Mono<Resource> readVideo(String id) throws IOException;
 
 

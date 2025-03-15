@@ -73,7 +73,7 @@ public class VideoService implements IVideoService {
     public void changeVideo(String idFile, MultipartFile file) throws IOException {
         Path path = Path.of(FOLDER_VIDEO_PATH);
         commService.folderChecking(path);
-        String filePath=path+file.getOriginalFilename();
+        String filePath=path+"/"+file.getOriginalFilename();
         videoRepository.findById(idFile).ifPresentOrElse(video -> {
             try {
                 delete(video.getFileName());
@@ -100,7 +100,7 @@ public class VideoService implements IVideoService {
      */
 
     public boolean delete (String filename) throws IOException {
-        return new File(FOLDER_VIDEO_PATH + filename).delete();
+        return new File(FOLDER_VIDEO_PATH +"/"+ filename).delete();
     }
 
     /**
@@ -131,13 +131,7 @@ public class VideoService implements IVideoService {
     }
 
 
-    @Override
-    public byte[]  getVideo(String id) throws IOException {
-        Video file = videoRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(NO,localService.getMessage(FILE_NOT_FOUND)));
-        return Files.readAllBytes(new File(file.getFilePath()).toPath());
 
-    }
 
 
 

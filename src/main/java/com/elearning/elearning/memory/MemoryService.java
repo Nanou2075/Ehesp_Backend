@@ -1,6 +1,5 @@
 package com.elearning.elearning.memory;
 
-import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

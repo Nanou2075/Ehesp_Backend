@@ -77,7 +77,7 @@ public class CoverService implements ICoverService {
      */
 
     public boolean delete (String filename) throws IOException {
-     return new File(FOLDER_DOCUMENT_PATH + filename).delete();
+     return new File(FOLDER_DOCUMENT_PATH +"/"+ filename).delete();
     }
 
     /**
@@ -99,7 +99,7 @@ public class CoverService implements ICoverService {
     public void  loadFile (MultipartFile file, Module module) throws IOException {
         Path path = Path.of(FOLDER_BOOK_PATH);
         commService.folderChecking(path);
-        String filePath=path+file.getOriginalFilename();
+        String filePath=path+"/"+file.getOriginalFilename();
         coverRepository.findByModule(module).ifPresentOrElse(cover -> {
                     try {
                         delete(cover.getFileName());

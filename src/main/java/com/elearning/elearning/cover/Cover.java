@@ -1,7 +1,6 @@
 package com.elearning.elearning.cover;
 
 
-import com.elearning.elearning.account.Account;
 import com.elearning.elearning.common.BaseEntity;
 import com.elearning.elearning.module.Module;
 import jakarta.persistence.CascadeType;

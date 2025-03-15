@@ -32,10 +32,6 @@ public class PodcastController implements PodcastResource {
 
 
 
-    @Override
-    public byte[] getPodcast(String id) throws IOException {
-        return podcastService.getPodcast(id);
-    }
 
     @Override
     public Mono<Resource> readPodcast(String id) throws IOException {

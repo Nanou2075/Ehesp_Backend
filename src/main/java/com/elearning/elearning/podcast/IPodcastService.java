@@ -15,7 +15,5 @@ import java.util.List;
 public interface IPodcastService {
     void uploadPodcast (List<MultipartFile> files, Module module) throws IOException;
     void changePodcast(String idFile, MultipartFile file) throws IOException;
-    byte[] getPodcast(String id) throws IOException;
-
     Mono<Resource> readPodcast(String id);
 }

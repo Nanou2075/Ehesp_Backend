@@ -31,11 +31,7 @@ public class VideoController implements VideoResource {
     }
 
 
-    @Override
-    public byte[] getVideo (String id) throws IOException {
-        return videoService.getVideo(id);
 
-    }
     @Override
     public Mono<Resource> readVideo(String id) throws IOException {
         return videoService.readVideo(id);
