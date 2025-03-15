@@ -15,6 +15,9 @@ import java.io.IOException;
 public interface IStudentService {
     void addStudent(MultipartFile cv,MultipartFile degree,Student student) throws MessagingException, IOException;
     Student getStudentById(String id );
+
+    Student validStudentBy(String id) throws MessagingException, IOException;
+
     void updateStudent(String id, StudentUpdate customer);
     void deleteStudentById (String id);
     PageResponse getAllStudent(int page , int size);

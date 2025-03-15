@@ -18,6 +18,9 @@ public interface IStudentResource {
     @GetMapping("get/{id}")
     Response getStudentById(@PathVariable  String id);
 
+    @GetMapping("valid/{id}")
+    Response validStudent(@PathVariable String id);
+
     @DeleteMapping("delete/{id}")
     Response deleteStudentById (@PathVariable String id);
 

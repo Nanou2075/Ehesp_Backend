@@ -33,6 +33,11 @@ public class StudentController implements IStudentResource {
     }
 
     @Override
+    public Response validStudent(String id) {
+        return new Response(OK,studentService.validStudentBy(id));
+    }
+
+    @Override
     public Response deleteStudentById(String id) {
         studentService.deleteStudentById(id);
         return  new Response(OK,localService.getMessage(DELETE));

@@ -12,4 +12,5 @@ public class MailRequest {
     private String destinationMail;
     private String fullName;
     private String code;
+    private String password;
 }

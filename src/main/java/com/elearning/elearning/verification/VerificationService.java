@@ -55,7 +55,7 @@ public class VerificationService {
      * @param account permit to get account information verification code sending
      */
 
-    public void verificationCode(Account account) throws MessagingException {
+    public void verificationCode(Account account,String password) throws MessagingException {
        Verification verification = Verification.builder()
                 .code(activationCode())
                 .expiredDate(expirationDate())
@@ -66,6 +66,7 @@ public class VerificationService {
         verificationRepository.save(verification);
         MailRequest mailRequest = MailRequest.builder().
                 code(verification.getCode())
+                .password(password)
                 .destinationMail(account.getMail())
                 .fullName(account.getFullName()).
                 build();

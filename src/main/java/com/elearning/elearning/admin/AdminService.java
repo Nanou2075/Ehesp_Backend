@@ -3,6 +3,7 @@ package com.elearning.elearning.admin;
 
 import com.elearning.elearning.account.Account;
 import com.elearning.elearning.account.AccountRepository;
+import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.common.PageResponse;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
@@ -37,6 +38,7 @@ public class AdminService implements IAdminService {
     private final AccountRepository accountRepository;
     private final LocalService localService;
     private final ModelMapper modelMapper;
+    private final CommService commService;
     private final VerificationService verificationService;
 
 
@@ -52,16 +54,14 @@ public class AdminService implements IAdminService {
         Optional.ofNullable(accountRepository.findByPhoneOrMailIgnoreCase(request.getPhone(), request.getMail())).ifPresent(
                 (accountEntity) -> {
                     throw new AlreadyExistException(localService.getMessage(USER_EXIT));});
+        String password = commService.password();
         Admin admin = modelMapper.map(request, Admin.class);
         Account account = modelMapper.map(admin, Account.class);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setPassword(passwordEncoder.encode(password));
         account.setPermission(Permission.ADMIN);
         accountRepository.save(account);
         adminRepository.save(admin);
-        /**
-         * generate Activation code for account and send
-         */
-        verificationService.verificationCode(account);
+        verificationService.verificationCode(account,password);
     }
 
 

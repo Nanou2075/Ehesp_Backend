@@ -67,7 +67,6 @@ public class StudentService implements IStudentService {
         accountRepository.save(account);
         studentRepository.save(student);
         documentService.uploadCV(cv, account);
-        verificationService.verificationCode(account);
     }
 
 
@@ -78,6 +77,34 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student getStudentById(String id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND)));
+    }
+
+    /**
+     * @param id is the param for our request to get Student
+     * @return customer is the value return
+     */
+
+    @Override
+    public Student validStudentBy(String id)  {
+        studentRepository.findById(id).ifPresent(
+                student -> {
+                    String password = commService.password();
+                    Account account = accountRepository.findByPhoneOrMailIgnoreCase(student.getPhone(), student.getMail());
+                    account.setPassword(passwordEncoder.encode(password));
+                    account.setAvailable(true);
+                    accountRepository.save(account);
+                    studentRepository.save(student);
+                    try {
+                        verificationService.verificationCode(account,password);
+                    } catch (MessagingException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+        );
+
         return studentRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND)));
     }
