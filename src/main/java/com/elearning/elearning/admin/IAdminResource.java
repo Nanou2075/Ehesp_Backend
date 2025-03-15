@@ -4,7 +4,7 @@ import com.elearning.elearning.exception.Response.Response;
 import jakarta.mail.MessagingException;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("teacher/")
+@RequestMapping("admin/")
 public interface IAdminResource {
 
     @PostMapping("save")
@@ -21,6 +21,6 @@ public interface IAdminResource {
 
     @GetMapping("all")
     Response getAllAdmin(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-                    @RequestParam(name = "size", defaultValue = "10", required = false) int size);
+                    @RequestParam(name = "size", defaultValue = "50", required = false) int size);
 
 }

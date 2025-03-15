@@ -1,7 +1,7 @@
 package com.elearning.elearning.training;
 
 import com.elearning.elearning.common.BaseEntity;
-import com.elearning.elearning.section.Section;
+import com.elearning.elearning.domain.Domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -20,5 +20,5 @@ public class Training extends BaseEntity {
     private String name;
     private BigDecimal price;
     @ManyToOne
-    private Section section;
+    private Domain domain;
 }

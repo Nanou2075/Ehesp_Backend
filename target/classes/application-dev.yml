@@ -3,9 +3,9 @@
     port: 9091
     servlet:
       context-path: /api
-#      encoding:
-#        charset: UTF-8
-#        force-response: false
+      encoding:
+        charset: UTF-8
+        force-response: false
     tomcat:
       threads:
         max: 5550
@@ -14,10 +14,10 @@
     main:
       allow-circular-references: true
     datasource:
-      url: jdbc:postgresql://localhost:5432/e-learning
-      username: postgres
+      url: jdbc:mysql://localhost:3306/ehesp-learning?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      username: root
       password: root
-      driver-class-name: org.postgresql.Driver
+
       hikari:
         allow-pool-suspension: true
         maximum-pool-size: 400
@@ -27,8 +27,8 @@
     jpa:
       hibernate:
         ddl-auto: update
+      database-platform: org.hibernate.dialect.MySQLDialect
 
-      database: POSTGRESQL
 
       properties:
         cache:

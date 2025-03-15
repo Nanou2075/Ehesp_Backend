@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@DiscriminatorValue("TEACHER")
+@DiscriminatorValue("ADMIN")
 @Entity
 public class Admin extends Account {
 

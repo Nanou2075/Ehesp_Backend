@@ -1,5 +1,6 @@
 package com.elearning.elearning.video;
 
+import com.elearning.elearning.module.Module;
 import lombok.*;
 
 @Getter
@@ -8,6 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class VideoResponse {
+    private String fileName;
+    private String filePath;
     private String url;
+    private String fileType;
+    private Module module;
+    private String cover;
 
 }
