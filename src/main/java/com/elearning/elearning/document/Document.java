@@ -3,6 +3,7 @@ package com.elearning.elearning.document;
 
 import com.elearning.elearning.account.Account;
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.teacher.Teacher;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -22,4 +23,6 @@ public class Document extends BaseEntity {
     private String fileType;
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     private Account account;
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    private Teacher teacher;
 }

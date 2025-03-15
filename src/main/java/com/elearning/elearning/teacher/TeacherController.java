@@ -3,6 +3,9 @@ package com.elearning.elearning.teacher;
 import com.elearning.elearning.exception.Response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -11,8 +14,8 @@ public class TeacherController implements TeacherResource {
 
 
     @Override
-    public Response save( Teacher teacher ) {
-        return teacherService.save(teacher);
+    public Response save(MultipartFile cv, Teacher teacher ) throws IOException {
+        return teacherService.save(cv,teacher);
     }
 
     @Override

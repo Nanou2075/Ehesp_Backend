@@ -2,13 +2,17 @@ package com.elearning.elearning.teacher;
 
 
 import com.elearning.elearning.exception.Response.Response;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequestMapping("teacher/")
 public interface TeacherResource {
 
-    @PostMapping("save")
-    Response save(@RequestBody Teacher teacher);
+    @PostMapping(value = "save",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    Response save(@RequestPart(value = "cv",required = false) MultipartFile cv,@RequestPart Teacher teacher) throws IOException;
 
     @PutMapping("update/{id}")
     Response update(@PathVariable String id, @RequestBody  Teacher teacher);

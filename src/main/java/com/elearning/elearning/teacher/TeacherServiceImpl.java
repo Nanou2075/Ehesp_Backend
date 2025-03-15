@@ -2,6 +2,7 @@ package com.elearning.elearning.teacher;
 
 
 import com.elearning.elearning.common.PageResponse;
+import com.elearning.elearning.document.DocumentService;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +30,7 @@ import static com.elearning.elearning.teacher.TeacherMessage.*;
 @Transactional
 public class TeacherServiceImpl implements TeacherService {
     private final TeacherRepository teacherRepository;
+    private final DocumentService documentService;
 
 
 
@@ -39,8 +43,10 @@ public class TeacherServiceImpl implements TeacherService {
      */
 
     @Override
-    public Response save(Teacher teacher) {
+    public Response save(MultipartFile cv,Teacher teacher) throws IOException {
         teacherRepository.save(teacher);
+        documentService.uploadTeacherCV(cv,teacher);
+
         return new Response(OK, TEACHER_SAVE);
     }
 

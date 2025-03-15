@@ -6,11 +6,11 @@ import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.security.authentication.AuthenticationService;
+import com.elearning.elearning.teacher.Teacher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +43,19 @@ public class DocumentService implements IDocumentService {
     public void updateMyCV (MultipartFile file) throws IOException {
         loadFile(file,service.currentAccount());
     }
+
+    /**
+     *
+     * @param file the value to upload  in Data
+     * @throws IOException
+     */
+    @Override
+    public void uploadTeacherCV(MultipartFile file, Teacher teacher) throws IOException {
+        loadTeacherFile(file,teacher);
+
+
+    }
+
 
     /**
      *
@@ -94,6 +107,38 @@ public class DocumentService implements IDocumentService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+
+    public void  loadTeacherFile (MultipartFile file, Teacher teacher) throws IOException {
+        Path path = Path.of(FOLDER_BOOK_PATH);
+        commService.folderChecking(path);
+        String filePath=path+file.getOriginalFilename();
+        documentRepository.findByTeacher(teacher).ifPresentOrElse(document -> {
+                    try {
+                        delete(document.getFileName());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    document.setFileName(file.getOriginalFilename());
+                    document.setFilePath(filePath);
+                    document.setFilePath(filePath);
+                    document.setFileType(file.getContentType());
+                    sendToFolder(file,filePath);
+                    documentRepository.save(document);
+
+                },() -> {
+                    Document fileSaved = documentRepository.save(Document.builder()
+                            .fileName(file.getOriginalFilename())
+                            .fileType(file.getContentType())
+                            .teacher( teacher)
+                            .filePath(filePath).build());
+                    sendToFolder(file,filePath);
+                    fileSaved.setUrl(URL_DOCUMENT+fileSaved.getId());
+                    documentRepository.save(fileSaved);
+                }
+        );
     }
 
 
