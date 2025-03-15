@@ -2,9 +2,13 @@ package com.elearning.elearning.book;
 
 
 import com.elearning.elearning.common.CommService;
+import com.elearning.elearning.cover.CoverRepository;
 import com.elearning.elearning.exception.NotFoundException;
+import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.module.Module;
+import com.elearning.elearning.module.ModuleRepository;
+import com.elearning.elearning.security.authentication.AuthenticationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
@@ -15,10 +19,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
+import static com.elearning.elearning.exception.Response.Security.OK;
 import static com.elearning.elearning.messages.FileMessage.FILE_NOT_FOUND;
+import static com.elearning.elearning.training.TrainingMessage.TRAINING_EMPTY;
 import static com.elearning.elearning.uitils.FileUtils.*;
 
 
@@ -30,6 +38,9 @@ public class BookService implements IBookService {
     private final LocalService localService;
     private final ResourceLoader resourceLoader;
     private final CommService commService;
+    private final AuthenticationService authenticationService;
+    private final ModuleRepository moduleRepository;
+    private final CoverRepository coverRepository;
 
 
 
@@ -125,6 +136,33 @@ public class BookService implements IBookService {
         String filePath=file.getFilePath();
         return Files.readAllBytes(new File(filePath).toPath());
 
+    }
+
+    @Override
+    public Response getAllByModule() {
+        Set<Book> podcasts = new HashSet<>();
+        Set<Module> allModule = moduleRepository.findAllByTraining(authenticationService.currentTraining());
+        if (allModule.isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        allModule.forEach(module -> {
+            podcasts.addAll(bookRepository.findAllByModule(module));
+        });
+        return new Response(OK,convertToResponse(podcasts)) ;
+    }
+
+    public Set<BookResponse> convertToResponse(Set<Book> bookSet) {
+        Set<BookResponse> bookResponseSet = new HashSet<>();
+        bookSet.forEach(book-> {
+            bookResponseSet.add(BookResponse.builder()
+                    .id(book.getId())
+                    .module(book.getModule())
+                    .fileName(book.getFileName())
+                    .url(book.getUrl())
+                    .numberOfBook(bookRepository.findAllByModule(book.getModule()).size())
+                    .cover(coverRepository.findCoverByModule(book.getModule()).getUrl())
+                    .build());
+        });
+        return bookResponseSet;
     }
 
 

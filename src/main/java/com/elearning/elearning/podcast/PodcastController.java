@@ -29,6 +29,11 @@ public class PodcastController implements PodcastResource {
         return new Response(OK,localService.getMessage(FILE_SUCCESS)) ;
     }
 
+    @Override
+    public Response getPodcastByModule () throws IOException {
+        return podcastService.getAllByModule();
+    }
+
 
 
 

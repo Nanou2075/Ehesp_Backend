@@ -15,6 +15,8 @@ public interface VideoResource {
     @PostMapping("change/{idFile}")
     Response change(@PathVariable String idFile, MultipartFile file) throws IOException;
 
+    @PostMapping("module")
+    Response getVideoByModule() throws IOException;
 
     @GetMapping(value = "read/{id}",produces = "video/mp4")
     Mono<Resource> readVideo(@PathVariable String id) throws IOException;

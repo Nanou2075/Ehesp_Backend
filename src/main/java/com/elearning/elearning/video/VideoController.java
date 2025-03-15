@@ -30,6 +30,11 @@ public class VideoController implements VideoResource {
         return new Response(OK,localService.getMessage(FILE_SUCCESS)) ;
     }
 
+    @Override
+    public Response getVideoByModule () throws IOException {
+        return videoService.getAllByModule();
+    }
+
 
 
     @Override

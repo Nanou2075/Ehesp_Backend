@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface CoverRepository extends JpaRepository<Cover,String> {
      Optional<Cover> findByModule(Module module);
+     Cover findCoverByModule(Module module);
      Optional<Cover> findByModuleId(String id);
 
 }

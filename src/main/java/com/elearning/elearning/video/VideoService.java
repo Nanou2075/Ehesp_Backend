@@ -2,10 +2,13 @@ package com.elearning.elearning.video;
 
 
 import com.elearning.elearning.common.CommService;
+import com.elearning.elearning.cover.CoverRepository;
 import com.elearning.elearning.exception.NotFoundException;
+import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.module.Module;
-import com.elearning.elearning.module.ModuleResponse;
+import com.elearning.elearning.module.ModuleRepository;
+import com.elearning.elearning.security.authentication.AuthenticationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -13,23 +16,19 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
+import static com.elearning.elearning.exception.Response.Security.OK;
 import static com.elearning.elearning.messages.FileMessage.FILE_NOT_FOUND;
 import static com.elearning.elearning.training.TrainingMessage.TRAINING_EMPTY;
-import static com.elearning.elearning.training.TrainingMessage.TRAINING_NOT_FOUND;
 import static com.elearning.elearning.uitils.FileUtils.*;
 
 
@@ -40,6 +39,10 @@ public class VideoService implements IVideoService {
     private final VideoRepository videoRepository;
     private final LocalService localService;
     private final CommService commService;
+    private final AuthenticationService authenticationService;
+    private final ModuleRepository moduleRepository;
+    private final CoverRepository coverRepository;
+
 
 
     /**
@@ -138,28 +141,32 @@ public class VideoService implements IVideoService {
 
 
 
-//    @Override
-//    public Set<ModuleResponse> getAll() {
-//        if (videoRepository.findAll().isEmpty())
-//            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-//        return convertToResponse(Optional.of(moduleRepository.findAll())
-//                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
-//    }
-//
-//    public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
-//        Set<ModuleResponse> moduleResponseList = new HashSet<>();
-//        moduleList.forEach(module -> {
-//            moduleResponseList.add(ModuleResponse.builder()
-//                    .id(module.getId())
-//                    .training(module.getTraining())
-//                    .name(module.getName())
-//                    .numberOfVideo(videoRepository.findAllByModule(module).size())
-//                    .numberOfPdf(bookRepository.findAllByModule(module).size())
-//                    .numberOfPodcast(podcastRepository.findAllByModule(module).size())
-//                    .build());
-//        });
-//        return moduleResponseList;
-//    }
+    @Override
+    public Response getAllByModule() {
+        Set<Video> videos = new HashSet<>();
+        Set<Module> allModule = moduleRepository.findAllByTraining(authenticationService.currentTraining());
+        if (allModule.isEmpty())
+                throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+           allModule.forEach(module -> {
+               videos.addAll(videoRepository.findAllByModule(module));
+           });
+        return new Response(OK, convertToResponse(videos));
+    }
+
+    public Set<VideoResponse> convertToResponse(Set<Video> videoSet) {
+        Set<VideoResponse> videosResponseSet = new HashSet<>();
+        videoSet.forEach(video -> {
+            videosResponseSet.add(VideoResponse.builder()
+                    .id(video.getId())
+                    .module(video.getModule())
+                    .fileName(video.getFileName())
+                    .url(video.getUrl())
+                    .numberOfVideo(videoRepository.findAllByModule(video.getModule()).size())
+                    .cover(coverRepository.findCoverByModule(video.getModule()).getUrl())
+                    .build());
+        });
+        return videosResponseSet;
+    }
 
 
 

@@ -16,23 +16,27 @@ import static com.elearning.elearning.messages.FileMessage.FILE_SUCCESS;
 @RestController
 @RequiredArgsConstructor
 public class BookController implements BookResource {
-    private final BookService fileService;
+    private final BookService bookService;
     private final LocalService localService;
 
 
 
     @Override
-    public Response changeBook(String idFile, MultipartFile file) throws IOException {
-        fileService.changeBook(idFile,file);
+    public Response changeBook(String idFile, MultipartFile book) throws IOException {
+        bookService.changeBook(idFile,book);
         return new Response(OK,localService.getMessage(FILE_SUCCESS)) ;
     }
 
+    @Override
+    public Response getBookByModule () throws IOException {
+        return bookService.getAllByModule();
+    }
 
 
 
     @Override
     public byte[] getBook(String id) throws IOException {
-        return fileService.getBook(id);
+        return bookService.getBook(id);
     }
 
 
