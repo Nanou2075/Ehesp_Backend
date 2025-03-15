@@ -10,9 +10,9 @@ import java.io.IOException;
 @Service
 @Transactional
 public interface IDegreeService {
-    void updateCV(MultipartFile file) throws IOException;
+    void updateMyDegree(MultipartFile file) throws IOException;
 
-    void uploadCV(MultipartFile file, Account account) throws IOException;
+    void uploadDegree(MultipartFile file, Account account) throws IOException;
 
     byte[] getFile(String fileName) throws IOException;
 }

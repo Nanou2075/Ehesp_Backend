@@ -26,7 +26,7 @@ public class DocumentController implements DocumentResource {
 
     @Override
     public Response updateCV(MultipartFile file) throws IOException {
-        documentService.updateCV(file);
+        documentService.updateMyCV(file);
         return new Response(OK,localService.getMessage(FILE_SUCCESS));
 
     }

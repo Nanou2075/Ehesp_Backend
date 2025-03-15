@@ -26,8 +26,8 @@ public class DegreeController implements DegreeResource {
 
 
     @Override
-    public Response updateCV(MultipartFile file) throws IOException {
-        documentService.updateCV(file);
+    public Response updateMyDegree(MultipartFile file) throws IOException {
+        documentService.updateMyDegree(file);
         return new Response(OK,localService.getMessage(FILE_SUCCESS));
 
     }

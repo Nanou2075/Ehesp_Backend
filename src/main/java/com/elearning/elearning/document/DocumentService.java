@@ -40,7 +40,7 @@ public class DocumentService implements IDocumentService {
      * @throws IOException
      */
     @Override
-    public void updateCV (MultipartFile file) throws IOException {
+    public void updateMyCV (MultipartFile file) throws IOException {
         loadFile(file,service.currentAccount());
     }
 

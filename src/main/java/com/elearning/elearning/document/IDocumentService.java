@@ -10,7 +10,7 @@ import java.io.IOException;
 @Service
 @Transactional
 public interface IDocumentService {
-    void updateCV(MultipartFile file) throws IOException;
+    void updateMyCV(MultipartFile file) throws IOException;
 
     void uploadCV(MultipartFile file, Account account) throws IOException;
 

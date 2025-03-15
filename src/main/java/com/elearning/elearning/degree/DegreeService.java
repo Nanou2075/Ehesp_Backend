@@ -38,9 +38,10 @@ public class DegreeService implements IDegreeService {
      * @throws IOException
      */
     @Override
-    public void updateCV (MultipartFile file) throws IOException {
+    public void updateMyDegree (MultipartFile file) throws IOException {
         loadFile(file,service.currentAccount());
     }
+
 
     /**
      *
@@ -48,7 +49,7 @@ public class DegreeService implements IDegreeService {
      * @throws IOException
      */
     @Override
-    public void uploadCV(MultipartFile file, Account account) throws IOException {
+    public void uploadDegree (MultipartFile file, Account account) throws IOException {
         loadFile(file,account);
 
 

@@ -14,7 +14,7 @@ public interface DegreeResource {
     byte[] getFile(@PathVariable String id) throws IOException;
 
     @PostMapping("upload")
-    Response updateCV (@RequestParam("file") MultipartFile file) throws IOException;
+    Response updateMyDegree (@RequestParam("file") MultipartFile file) throws IOException;
 
 
 }
