@@ -12,7 +12,7 @@ import java.io.IOException;
 public interface IStudentResource {
 
     @PostMapping(value = "save",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    Response addStudent(@RequestPart(value = "file",required = false)  MultipartFile file,  @RequestPart StudentRequest request) throws MessagingException, IOException;
+    Response addStudent(@RequestPart(value = "file",required = false)  MultipartFile cv,@RequestPart(value = "degree",required = false)  MultipartFile file,  @RequestPart Student student) throws MessagingException, IOException;
 
     @GetMapping("get/{id}")
     Response getStudentById(@PathVariable  String id);

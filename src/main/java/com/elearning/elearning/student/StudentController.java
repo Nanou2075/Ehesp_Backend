@@ -21,8 +21,8 @@ public class StudentController implements IStudentResource {
     private final LocalService localService;
 
     @Override
-    public Response addStudent(MultipartFile file, StudentRequest request) throws MessagingException, IOException {
-        studentService.addStudent(file,request);
+    public Response addStudent(MultipartFile cv, MultipartFile degree,Student student) throws MessagingException, IOException {
+        studentService.addStudent(cv,degree,student);
         return new Response(OK,localService.getMessage(ACCOUNT_SAVE));
     }
 

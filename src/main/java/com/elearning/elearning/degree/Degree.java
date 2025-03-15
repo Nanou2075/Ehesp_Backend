@@ -3,6 +3,7 @@ package com.elearning.elearning.degree;
 
 import com.elearning.elearning.account.Account;
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.student.Student;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
