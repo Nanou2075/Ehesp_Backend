@@ -2,11 +2,13 @@ package com.elearning.elearning.module;
 
 
 import com.elearning.elearning.book.BookRepository;
+import com.elearning.elearning.book.BookService;
 import com.elearning.elearning.cover.CoverService;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.podcast.PodcastRepository;
+import com.elearning.elearning.podcast.PodcastService;
 import com.elearning.elearning.video.Video;
 import com.elearning.elearning.video.VideoRepository;
 import com.elearning.elearning.video.VideoService;
@@ -35,6 +37,8 @@ public class ModuleService implements IModuleService {
     private final BookRepository bookRepository;
     private final LocalService localService;
     private final VideoService videoService;
+    private final BookService bookService;
+    private final PodcastService podcastService;
     private final CoverService coverService;
 
 
@@ -44,12 +48,14 @@ public class ModuleService implements IModuleService {
      */
 
     @Override
-    public void addModule(List<MultipartFile> files,Module module,MultipartFile file) throws IOException {
+    public void addModule(List<MultipartFile> videos,List<MultipartFile> books,List<MultipartFile> podcasts,MultipartFile cover,Module module) throws IOException {
         if (moduleRepository.findByNameIgnoreCase(module.getName()).isPresent()){
            throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
         Module save = moduleRepository.save(module);
-        videoService.uploadVideo(files,module);
-           coverService.uploadCover(file,save);
+        videoService.uploadVideo(videos,module);
+        bookService.uploadBook(books,module);
+        podcastService.uploadPodcast(podcasts,module);
+        coverService.uploadCover(cover,save);
     }
 
 

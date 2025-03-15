@@ -11,7 +11,11 @@ import java.util.List;
 @RequestMapping("module/")
 public interface ModuleResource {
     @PostMapping(value = "save",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    Response addModule(@RequestParam List<MultipartFile> files,@RequestParam MultipartFile file,@RequestPart Module module ) throws IOException;
+    Response addModule(@RequestParam(value = "videos",required = false) List<MultipartFile> videos,
+                       @RequestParam(value = "books",required = false) List<MultipartFile> books,
+                       @RequestParam(value = "podcasts",required = false) List<MultipartFile> podcasts,
+                       @RequestParam(value = "podcasts",required = false)   MultipartFile cover,
+                       @RequestPart Module module ) throws IOException;
     @PutMapping("{id}")
     Response updateModule(@PathVariable String id ,@RequestBody Module module);
 
