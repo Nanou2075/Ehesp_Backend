@@ -23,7 +23,5 @@ public class ModuleResponse {
     private int numberOfPodcast;
 
 
-//    private Set<Video> videos;
-
 
 }

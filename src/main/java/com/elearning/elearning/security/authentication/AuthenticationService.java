@@ -8,6 +8,8 @@ import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.request.ChangePassword;
 import com.elearning.elearning.security.accessToken.AccessTokenService;
 import com.elearning.elearning.security.refreshToken.RefreshTokenService;
+import com.elearning.elearning.student.StudentRepository;
+import com.elearning.elearning.training.Training;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -34,6 +36,7 @@ public class AuthenticationService implements UserDetailsService {
     private final AccessTokenService accessTokenService;
     private final RefreshTokenService refreshTokenService;
     private final LocalService localService;
+    private final StudentRepository studentRepository;
 
     /**
      *
@@ -64,6 +67,14 @@ public class AuthenticationService implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
         return Optional.ofNullable(accountRepository.findAccountById(principal))
+                .orElseThrow(() -> new NotFoundException(NO,localService.getMessage(USER_NOT_FOUND)));
+    }
+
+
+    public Training currentTraining() throws NotFoundException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String principal = authentication.getName();
+        return Optional.ofNullable(studentRepository.findStudentById(principal).getTraining())
                 .orElseThrow(() -> new NotFoundException(NO,localService.getMessage(USER_NOT_FOUND)));
     }
 

@@ -110,7 +110,6 @@ public class ModuleService implements IModuleService {
     public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
         Set<ModuleResponse> moduleResponseList = new HashSet<>();
         moduleList.forEach(module -> {
-
             moduleResponseList.add(ModuleResponse.builder()
                             .id(module.getId())
                             .training(module.getTraining())

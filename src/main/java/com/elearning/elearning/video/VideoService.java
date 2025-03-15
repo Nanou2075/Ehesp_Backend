@@ -5,6 +5,7 @@ import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.module.Module;
+import com.elearning.elearning.module.ModuleResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -20,10 +21,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.messages.FileMessage.FILE_NOT_FOUND;
+import static com.elearning.elearning.training.TrainingMessage.TRAINING_EMPTY;
+import static com.elearning.elearning.training.TrainingMessage.TRAINING_NOT_FOUND;
 import static com.elearning.elearning.uitils.FileUtils.*;
 
 
@@ -129,6 +135,31 @@ public class VideoService implements IVideoService {
         return Mono.fromSupplier(()->new FileSystemResource(file.getFilePath()));
 
     }
+
+
+
+//    @Override
+//    public Set<ModuleResponse> getAll() {
+//        if (videoRepository.findAll().isEmpty())
+//            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+//        return convertToResponse(Optional.of(moduleRepository.findAll())
+//                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+//    }
+//
+//    public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
+//        Set<ModuleResponse> moduleResponseList = new HashSet<>();
+//        moduleList.forEach(module -> {
+//            moduleResponseList.add(ModuleResponse.builder()
+//                    .id(module.getId())
+//                    .training(module.getTraining())
+//                    .name(module.getName())
+//                    .numberOfVideo(videoRepository.findAllByModule(module).size())
+//                    .numberOfPdf(bookRepository.findAllByModule(module).size())
+//                    .numberOfPodcast(podcastRepository.findAllByModule(module).size())
+//                    .build());
+//        });
+//        return moduleResponseList;
+//    }
 
 
 
