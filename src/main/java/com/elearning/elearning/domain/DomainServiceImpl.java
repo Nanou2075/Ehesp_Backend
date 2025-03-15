@@ -22,45 +22,17 @@ import static com.elearning.elearning.domain.DomainMessage.*;
 @Transactional
 public class DomainServiceImpl implements DomainService {
     private final DomainRepository domainRepository;
-    private final DomainMapper mapper;
-
-    /*
-    Verification des donnee d'enregistrement de la section
-     */
-
-    private void checkSaveSection(DomainRequest request) {
-        Domain domain = domainRepository.findByName(request.getName());
-        if (domain != null) {
-            throw new NotFoundException(NO, DOMAIN_EXIT);
-        }
-
-    }
-
-    /*
-   Verification des donnee de modification de la section
-    */
-    private void checkUpdateSection(String id, DomainRequest request) {
-        Domain employerId = domainRepository.findById(id);
-        Domain employerFound = domainRepository.findByName(request.getName());
-
-        if (employerId == null) {
-            throw new NotFoundException(NO, DOMAIN_NO_EXIT);
-        }
-        if (employerFound != null) {
-            throw new NotFoundException(NO, DOMAIN_EXIT);
-        }
 
 
-    }
+
+
 
      /*
     Enregistrement  de la section
      */
 
     @Override
-    public Response save(DomainRequest request) {
-        checkSaveSection(request);
-        Domain domain = mapper.toEntity(request);
+    public Response save(Domain domain) {
         domainRepository.save(domain);
         return new Response(OK, DOMAIN_SAVE);
     }
@@ -70,10 +42,8 @@ public class DomainServiceImpl implements DomainService {
   Modification  de la section
    */
     @Override
-    public Response update(String id, DomainRequest request) {
-        checkUpdateSection(id, request);
-        Domain domain = domainRepository.findById(id);
-        domain.setName(request.getName());
+    public Response update(String id, Domain domain) {
+        domain.setName(domain.getName());
         domainRepository.save(domain);
         return new Response(OK, DOMAIN_UPDATE);
     }

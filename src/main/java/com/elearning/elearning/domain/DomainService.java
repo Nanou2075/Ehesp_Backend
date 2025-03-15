@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public interface DomainService {
-    Response save(DomainRequest request);
+    Response save(Domain domain);
 
-    Response update(String id, DomainRequest request);
+    Response update(String id, Domain domain);
 
     Response search(String keyword);
 

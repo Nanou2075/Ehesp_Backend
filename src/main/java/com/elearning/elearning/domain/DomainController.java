@@ -11,13 +11,13 @@ public class DomainController implements DomainResource {
     private final DomainService domainService;
 
     @Override
-    public Response save(DomainRequest request) {
-        return domainService.save(request);
+    public Response save(Domain domain) {
+        return domainService.save(domain);
     }
 
     @Override
-    public Response update(String id, DomainRequest request) {
-        return domainService.update(id, request);
+    public Response update(String id,Domain domain) {
+        return domainService.update(id, domain);
     }
 
     @Override

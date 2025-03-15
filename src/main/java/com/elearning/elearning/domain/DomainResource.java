@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("domain/")
 public interface DomainResource {
     @PostMapping("save")
-    Response save(@RequestBody @Valid DomainRequest request);
+    Response save(@RequestBody @Valid Domain domain );
 
     @PutMapping("update/{id}")
-    Response update(@PathVariable String id, @RequestBody DomainRequest request);
+    Response update(@PathVariable String id, @RequestBody Domain domain);
 
     @GetMapping("{id}")
     Response get(@PathVariable String id);
