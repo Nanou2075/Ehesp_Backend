@@ -31,6 +31,14 @@ private final LocalService localService;
     }
 
     @Override
+    public Response addModuleFile(List<MultipartFile> files,
+                                  String type,
+                                  Module module) throws IOException {
+        moduleService.addModuleFile(files,type,module);
+        return new Response(OK,localService.getMessage(TRAINING_SUCCESS));
+    }
+
+    @Override
     public Response updateModule(String id, Module module) {
         moduleService.updateModule(id, module);
         return new Response(OK,localService.getMessage(TRAINING_UPDATE));

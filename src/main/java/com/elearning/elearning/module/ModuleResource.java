@@ -16,6 +16,12 @@ public interface ModuleResource {
                        @RequestParam(value = "podcasts",required = false) List<MultipartFile> podcasts,
                        @RequestParam(value = "podcasts",required = false)   MultipartFile cover,
                        @RequestPart Module module ) throws IOException;
+
+    @PostMapping(value = "addFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    Response addModuleFile (@RequestParam(value = "files",required = false) List<MultipartFile> files,
+                       @RequestParam(value = "types",required = false)String type,
+                       @RequestPart Module module) throws IOException;
+
     @PutMapping("{id}")
     Response updateModule(@PathVariable String id ,@RequestBody Module module);
 

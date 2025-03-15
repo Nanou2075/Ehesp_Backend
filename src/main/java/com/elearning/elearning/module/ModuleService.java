@@ -9,7 +9,6 @@ import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.podcast.PodcastRepository;
 import com.elearning.elearning.podcast.PodcastService;
-import com.elearning.elearning.video.Video;
 import com.elearning.elearning.video.VideoRepository;
 import com.elearning.elearning.video.VideoService;
 import jakarta.transaction.Transactional;
@@ -56,6 +55,27 @@ public class ModuleService implements IModuleService {
         bookService.uploadBook(books,module);
         podcastService.uploadPodcast(podcasts,module);
         coverService.uploadCover(cover,save);
+    }
+
+
+    /**
+     *
+     * @param module the value to save in DB
+     */
+
+    @Override
+    public void addModuleFile(List<MultipartFile> files, String type, Module module) throws IOException {
+        if (moduleRepository.findById(module.getId()).isPresent()){
+             throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
+
+       switch (type){
+            case "video":
+                videoService.uploadVideo(files,module);
+           case "podcast":
+               podcastService.uploadPodcast(files,module);
+           case "pdf":
+               bookService.uploadBook(files,module);}
+
     }
 
 
