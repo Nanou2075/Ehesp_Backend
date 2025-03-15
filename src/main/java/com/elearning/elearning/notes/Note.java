@@ -26,7 +26,7 @@ public class Note extends BaseEntity {
     @ManyToOne
     private Student student;
     private String remark;
-    private String homework_grade;
-    private String exam_grade;
+    private double value;
+    private String type;
 
 }
