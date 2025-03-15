@@ -51,7 +51,7 @@ public class StudentService implements IStudentService {
      * @param student is the body of My addStudent Request
      */
     @Override
-    public void addStudent(MultipartFile cv,MultipartFile degree, Student student) throws MessagingException, IOException {
+    public void addStudent(MultipartFile cv, MultipartFile degree, Student student) throws MessagingException, IOException {
         /**
          *  check Student to save ;
          */
@@ -66,7 +66,6 @@ public class StudentService implements IStudentService {
         documentService.uploadCV(cv, account);
         verificationService.verificationCode(account);
     }
-
 
 
     /**
