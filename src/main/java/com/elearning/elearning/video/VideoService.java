@@ -33,9 +33,7 @@ import static com.elearning.elearning.uitils.FileUtils.*;
 public class VideoService implements IVideoService {
     private final VideoRepository videoRepository;
     private final LocalService localService;
-    private final ResourceLoader resourceLoader;
     private final CommService commService;
-
 
 
     /**
@@ -49,7 +47,7 @@ public class VideoService implements IVideoService {
         Path path = Path.of(FOLDER_VIDEO_PATH);
         commService.folderChecking(path);
         files.forEach(file -> {
-            String filePath=path+file.getOriginalFilename();
+            String filePath=path+"/"+file.getOriginalFilename();
             Video videoSaved = videoRepository.save(Video.builder()
                     .fileName(file.getOriginalFilename())
                     .fileType(file.getContentType())
@@ -65,6 +63,7 @@ public class VideoService implements IVideoService {
         });
 
     }
+
 
 
 
@@ -93,6 +92,7 @@ public class VideoService implements IVideoService {
         });
 
     }
+
     /**
      * @param filename the param to get
      * @return
