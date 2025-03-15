@@ -2,6 +2,8 @@ package com.elearning.elearning.account;
 
 
 import com.elearning.elearning.exception.NotFoundException;
+import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.exception.enums.Permission;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.security.authentication.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import static com.elearning.elearning.exception.Response.Security.NO;
+import static com.elearning.elearning.exception.Response.Security.OK;
 import static com.elearning.elearning.messages.AccountMessage.USER_NOT_FOUND;
 
 
@@ -36,6 +39,11 @@ public class AccountController implements AccountResource{
     public AccountResponse getAccountResponse (String accountId) {
         return getAccountResponse(accountRepository.findById(accountId) .orElseThrow(
                 ()-> new NotFoundException(NO, localService.getMessage(USER_NOT_FOUND)))) ;
+    }
+
+    @Override
+    public Response getPermission() {
+        return new Response(OK, Permission.values());
     }
 
     private AccountResponse getAccountResponse(Account account) {

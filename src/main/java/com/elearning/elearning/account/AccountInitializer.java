@@ -34,7 +34,6 @@ public class AccountInitializer implements CommandLineRunner {
              admin.setAttempt(3);
              admin.setNotLocked(true);
              admin.setAttemptDateExp(Instant.now());
-             admin.setType(SUPERADMIN);
              admin.setActivated(true);
              admin.setPermission(Permission.SUPERADMIN);
              admin.setNotLocked(true);
