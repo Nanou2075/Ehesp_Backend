@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 
@@ -21,7 +22,7 @@ import java.util.Set;
 @Entity
 public class Memory extends BaseEntity {
     private LocalDate date;
-    private LocalDate time;
+    private LocalTime time;
     private String content;
     @ManyToOne
     private Training training;
@@ -31,4 +32,5 @@ public class Memory extends BaseEntity {
     private Set<Teacher> jury;
     @OneToOne(cascade = CascadeType.ALL ,orphanRemoval = true)
     private Student student;
+    private  boolean done = false;
 }

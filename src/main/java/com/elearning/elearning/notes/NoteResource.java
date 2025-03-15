@@ -5,7 +5,7 @@ import com.elearning.elearning.exception.Response.Response;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("memory/")
+@RequestMapping("note/")
 public interface NoteResource {
     @PostMapping("save")
     Response save(@RequestBody @Valid Note note);

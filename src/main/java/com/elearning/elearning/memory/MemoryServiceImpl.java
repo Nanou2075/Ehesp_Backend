@@ -9,6 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
@@ -44,7 +46,6 @@ public class MemoryServiceImpl implements MemoryService {
    */
     @Override
     public Response update(String id, Memory value) {
-
         Memory memory = memoryRepository.findById(id);
         memoryRepository.save(memory);
         return new Response(OK, MEMORY_UPDATE);
@@ -85,10 +86,16 @@ public class MemoryServiceImpl implements MemoryService {
    */
     @Override
     public Response getAll() {
-        List<Memory> memories = memoryRepository.findAll(Sort.by("name").ascending());
+        List<Memory> memories = memoryRepository.findAll(Sort.by("createdDate").ascending());
         if (memories.isEmpty()) {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }
+        memories.forEach(memory -> {
+            if (memory.getDate().isBefore(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
+                memory.setDone(true);
+                memoryRepository.save(memory);
+            }
+        });
         return new Response(OK, memories);
     }
 }
