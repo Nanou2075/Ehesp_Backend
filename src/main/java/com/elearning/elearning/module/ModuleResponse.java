@@ -1,5 +1,6 @@
 package com.elearning.elearning.module;
 
+import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
 import com.elearning.elearning.video.Video;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,6 +22,7 @@ public class ModuleResponse {
     private int numberOfVideo;
     private int numberOfPdf;
     private int numberOfPodcast;
+   private  Teacher teacher;
 
 
 

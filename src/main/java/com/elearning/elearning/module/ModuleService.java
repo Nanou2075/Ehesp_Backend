@@ -9,6 +9,7 @@ import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.podcast.PodcastRepository;
 import com.elearning.elearning.podcast.PodcastService;
+import com.elearning.elearning.security.authentication.AuthenticationService;
 import com.elearning.elearning.training.Training;
 import com.elearning.elearning.video.VideoRepository;
 import com.elearning.elearning.video.VideoService;
@@ -40,6 +41,7 @@ public class ModuleService implements IModuleService {
     private final BookService bookService;
     private final PodcastService podcastService;
     private final CoverService coverService;
+    private final AuthenticationService authenticationService;
 
 
     /**
@@ -145,6 +147,15 @@ public class ModuleService implements IModuleService {
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 
+
+    @Override
+    public Set<ModuleResponse> getAllByStudent() {
+        if (moduleRepository.findAllByTraining(authenticationService.currentTraining()).isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        return convertToResponse(Optional.of(moduleRepository.findAll())
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+    }
+
     public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
         Set<ModuleResponse> moduleResponseList = new HashSet<>();
         moduleList.forEach(module -> {
@@ -152,6 +163,7 @@ public class ModuleService implements IModuleService {
                             .id(module.getId())
                             .training(module.getTraining())
                             .name(module.getName())
+                            .teacher(module.getTeacher())
                             .numberOfVideo(videoRepository.findAllByModule(module).size())
                             .numberOfPdf(bookRepository.findAllByModule(module).size())
                             .numberOfPodcast(podcastRepository.findAllByModule(module).size())

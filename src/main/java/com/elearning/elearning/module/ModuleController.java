@@ -66,4 +66,9 @@ private final LocalService localService;
     public Response getAllModuleByTraining(Training training) {
         return new Response(OK, moduleService.getAllByTraining(training));
     }
+
+    @Override
+    public Response getAllModuleByStudent() {
+        return new  Response(OK, moduleService.getAllByStudent());
+    }
 }

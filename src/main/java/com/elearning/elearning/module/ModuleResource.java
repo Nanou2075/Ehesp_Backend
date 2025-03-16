@@ -39,4 +39,7 @@ public interface ModuleResource {
 
     @PostMapping("training")
     Response getAllModuleByTraining(@RequestBody Training training);
+
+    @GetMapping("student")
+    Response getAllModuleByStudent();
 }

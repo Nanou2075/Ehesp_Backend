@@ -25,4 +25,6 @@ public interface IModuleService {
     Set<ModuleResponse> getAll();
 
     Set<ModuleResponse> getAllByTraining(Training training);
+
+    Set<ModuleResponse> getAllByStudent();
 }
