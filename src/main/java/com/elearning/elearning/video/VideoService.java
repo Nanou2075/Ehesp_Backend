@@ -153,6 +153,18 @@ public class VideoService implements IVideoService {
         return new Response(OK, convertToResponse(videos));
     }
 
+
+
+    @Override
+    public Response getAllByModuleId(String id) {
+        Set<Video> allByModuleId = videoRepository.findAllByModuleId(id);
+        if (allByModuleId.isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        Set<Video> videos = new HashSet<>(allByModuleId);
+
+        return new Response(OK, convertToResponse(videos));
+    }
+
     public Set<VideoResponse> convertToResponse(Set<Video> videoSet) {
         Set<VideoResponse> videosResponseSet = new HashSet<>();
         videoSet.forEach(video -> {

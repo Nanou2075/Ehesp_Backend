@@ -1,6 +1,7 @@
 package com.elearning.elearning.module;
 
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.training.Training;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,8 +21,9 @@ public interface ModuleResource {
 
     @PostMapping(value = "addFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     Response addModuleFile (@RequestParam(value = "files",required = false) List<MultipartFile> files,
-                       @RequestParam(value = "types",required = false)String type,
+                       @RequestPart(value = "type",required = false)String type,
                        @RequestPart Module module) throws IOException;
+
 
     @PutMapping("{id}")
     Response updateModule(@PathVariable String id ,@RequestBody Module module);
@@ -34,4 +36,7 @@ public interface ModuleResource {
 
     @GetMapping("all")
     Response getAllModule();
+
+    @PostMapping("training")
+    Response getAllModuleByTraining(@RequestBody Training training);
 }

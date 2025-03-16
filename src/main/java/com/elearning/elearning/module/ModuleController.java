@@ -3,6 +3,7 @@ package com.elearning.elearning.module;
 
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
+import com.elearning.elearning.training.Training;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,5 +60,10 @@ private final LocalService localService;
     @Override
     public Response getAllModule() {
         return new Response(OK, moduleService.getAll());
+    }
+
+    @Override
+    public Response getAllModuleByTraining(Training training) {
+        return new Response(OK, moduleService.getAllByTraining(training));
     }
 }

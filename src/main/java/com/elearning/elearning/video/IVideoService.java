@@ -19,4 +19,6 @@ public interface IVideoService {
     void changeVideo(String idFile, MultipartFile file) throws IOException;
     Mono<Resource> readVideo(String id) throws IOException;
     Response getAllByModule();
+
+    Response getAllByModuleId(String id);
 }

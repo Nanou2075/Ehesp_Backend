@@ -35,6 +35,11 @@ public class VideoController implements VideoResource {
         return videoService.getAllByModule();
     }
 
+    @Override
+    public Response getVideoByModuleId (String id) throws IOException {
+        return videoService.getAllByModuleId(id);
+    }
+
 
 
     @Override

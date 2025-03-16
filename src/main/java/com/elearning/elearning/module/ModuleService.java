@@ -9,6 +9,7 @@ import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.podcast.PodcastRepository;
 import com.elearning.elearning.podcast.PodcastService;
+import com.elearning.elearning.training.Training;
 import com.elearning.elearning.video.VideoRepository;
 import com.elearning.elearning.video.VideoService;
 import jakarta.transaction.Transactional;
@@ -70,16 +71,19 @@ public class ModuleService implements IModuleService {
 
     @Override
     public void addModuleFile(List<MultipartFile> files, String type, Module module) throws IOException {
-        if (moduleRepository.findById(module.getId()).isPresent()){
-             throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
-
+        if (moduleRepository.findById(module.getId()).isEmpty()){
+             throw new AlreadyExistException(NO,localService.getMessage(TRAINING_NOT_FOUND));}
        switch (type){
             case "video":
                 videoService.uploadVideo(files,module);
+                break;
            case "podcast":
                podcastService.uploadPodcast(files,module);
+               break;
            case "pdf":
-               bookService.uploadBook(files,module);}
+               bookService.uploadBook(files,module);
+               break;
+        }
 
     }
 
@@ -127,6 +131,15 @@ public class ModuleService implements IModuleService {
     @Override
     public Set<ModuleResponse> getAll() {
         if (moduleRepository.findAll().isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        return convertToResponse(Optional.of(moduleRepository.findAll())
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+    }
+
+
+    @Override
+    public Set<ModuleResponse> getAllByTraining(Training training) {
+        if (moduleRepository.findAllByTraining(training).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         return convertToResponse(Optional.of(moduleRepository.findAll())
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
