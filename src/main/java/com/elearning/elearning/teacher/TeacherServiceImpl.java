@@ -46,7 +46,6 @@ public class TeacherServiceImpl implements TeacherService {
     public Response save(MultipartFile cv,Teacher teacher) throws IOException {
         teacherRepository.save(teacher);
         documentService.uploadTeacherCV(cv,teacher);
-
         return new Response(OK, TEACHER_SAVE);
     }
 
@@ -104,7 +103,7 @@ public class TeacherServiceImpl implements TeacherService {
         if (teacherList.isEmpty()) {
             throw new NotFoundException(NO, TEACHER_EMPTY);
         }
-        Pageable pageable = PageRequest.of(page, size, Sort.by("lastName").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("fullName").ascending());
         Page<Teacher> teachers = teacherRepository.findAll(pageable);
         PageResponse<?> pageResponse = PageResponse.builder()
                 .content(Arrays.asList(teacherList.toArray()))
