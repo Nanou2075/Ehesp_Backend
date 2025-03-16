@@ -17,7 +17,7 @@ public interface MemoryResource {
     @GetMapping("{id}")
     Response get(@PathVariable String id);
 
-    @GetMapping("list")
+    @GetMapping("all")
     Response getAll();
 
     @DeleteMapping("{id}")

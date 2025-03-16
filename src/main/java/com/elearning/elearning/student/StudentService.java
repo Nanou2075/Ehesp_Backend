@@ -65,7 +65,6 @@ public class StudentService implements IStudentService {
                     throw new AlreadyExistException(localService.getMessage(USER_EXIT));
                 });
         Account account = modelMapper.map(student, Account.class);
-        account.setPassword(passwordEncoder.encode(commService.password()));
         account.setPermission(STUDENT);
         accountRepository.save(account);
         studentRepository.save(student);

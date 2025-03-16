@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MailRequest {
     private String destinationMail;
     private String fullName;
+    private String username;
     private String code;
     private String password;
 }

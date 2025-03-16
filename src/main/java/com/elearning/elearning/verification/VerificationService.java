@@ -68,7 +68,7 @@ public class VerificationService {
                 code(verification.getCode())
                 .password(password)
                 .destinationMail(account.getMail())
-                .fullName(account.getFullName()).
+                .username(account.getMail()).
                 build();
         mailService.sendVerificationMail(mailRequest);
 

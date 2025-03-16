@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import static com.elearning.elearning.mail.MailTemplate.VERIFICATION_CONFIRMATION;
+import static com.elearning.elearning.mail.MailTemplate.REGISTRATION_CONFIRMATION;
 import static com.elearning.elearning.messages.MailValue.username;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -39,14 +39,15 @@ public class MailService {
                 , UTF_8.name());
         mimeMessageHelper.setFrom(username);
         mimeMessageHelper.setTo(request.getDestinationMail());
-        final String templateName = VERIFICATION_CONFIRMATION.getTemplate();
+        final String templateName = REGISTRATION_CONFIRMATION.getTemplate();
         Map<String, Object> variables = new HashMap<>();
-        variables.put("fullName", request.getFullName());
+        variables.put("password", request.getPassword());
+        variables.put("username", request.getUsername());
         variables.put("code", request.getCode());
         Context context = new Context();
 
         context.setVariables(variables);
-        mimeMessageHelper.setSubject(VERIFICATION_CONFIRMATION.getSubject());
+        mimeMessageHelper.setSubject(REGISTRATION_CONFIRMATION.getSubject());
         try {
             String htmlTemplate = templateEngine.process(templateName,context);
             mimeMessageHelper.setText(htmlTemplate, true);
