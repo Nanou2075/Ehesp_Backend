@@ -16,6 +16,7 @@ public class FileUtils {
     public static final String URL_VIDEO="/api/video/";
     public static final String URL_PODCAST="/api/podcast/";
     public static final String URL_BOOK="/api/book/";
+    public static final String URL_COVER="/api/cover/";
 
 
 
