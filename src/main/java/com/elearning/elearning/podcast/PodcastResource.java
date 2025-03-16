@@ -18,6 +18,6 @@ public interface PodcastResource {
     @PostMapping("module")
     Response getPodcastByModule() throws IOException;
 
-    @GetMapping(value = "read/{id}",produces = "video/mp4")
+    @GetMapping(value = "{id}",produces = "video/mp4")
     Mono<Resource> readPodcast(@PathVariable String id) throws IOException;
 }

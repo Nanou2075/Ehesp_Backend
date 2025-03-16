@@ -18,7 +18,7 @@ public interface VideoResource {
     @PostMapping("module")
     Response getVideoByModule() throws IOException;
 
-    @GetMapping(value = "read/{id}",produces = "video/mp4")
+    @GetMapping(value = "{id}",produces = "video/mp4")
     Mono<Resource> readVideo(@PathVariable String id) throws IOException;
 
 
