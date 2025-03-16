@@ -14,6 +14,8 @@ import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.document.DocumentService;
 import com.elearning.elearning.training.Training;
 import com.elearning.elearning.verification.VerificationService;
+import com.elearning.elearning.video.Video;
+import com.elearning.elearning.video.VideoResponse;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.exception.Response.Security.OK;
@@ -182,12 +182,29 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public Response getAllStudentByTraining(Training training) {
+    public Set<StudentResponse> getAllStudentByTraining(Training training) {
         List<Student> students = studentRepository.findAllByTraining(training);
         if (students.isEmpty()) {
             throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));
         }
-       return new Response(OK,students);
+       return convertToResponse(students);
+    }
+
+
+    public Set<StudentResponse> convertToResponse(List<Student> students) {
+        Set<StudentResponse> studentResponses = new HashSet<>();
+        students.forEach(student -> {
+            studentResponses.add(StudentResponse.builder()
+                    .id(student.getId())
+                    .fullName(student.getFullName())
+                     .mail(student.getMail())
+                     .available(student.isAvailable())
+                    .birthday(student.getBirthday())
+                    .phone(student.getPhone())
+                    .createdDate(student.getCreatedDate())
+                    .build());
+        });
+        return studentResponses;
     }
 
 }

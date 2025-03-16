@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 @Transactional
 @Service
@@ -22,5 +24,5 @@ public interface IStudentService {
     void deleteStudentById (String id);
     PageResponse getAllStudent(int page , int size);
 
-    Response getAllStudentByTraining(Training training);
+    Set<StudentResponse> getAllStudentByTraining(Training training);
 }

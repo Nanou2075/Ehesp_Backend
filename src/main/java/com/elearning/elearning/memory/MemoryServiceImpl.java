@@ -91,8 +91,8 @@ public class MemoryServiceImpl implements MemoryService {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }
         memories.forEach(memory -> {
-            if (memory.getDate().isBefore(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
-                memory.setDone(true);
+            if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
+                memory.setValid(true);
                 memoryRepository.save(memory);
             }
         });

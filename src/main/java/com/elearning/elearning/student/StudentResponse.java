@@ -2,26 +2,27 @@ package com.elearning.elearning.student;
 
 
 import com.elearning.elearning.document.IDocumentResponse;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.elearning.elearning.training.Training;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class StudentResponse {
+    private String id;
     private String mail;
     private double balance;
     private String phone;
-    private String password;
-    private String name;
-    private IDocumentResponse file;
-    private LocalDate createdDate;
-    private LocalDate lastModifiedDate;
+    private boolean available;
+    private String fullName;
+    private LocalDate birthday;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
 
 
 }

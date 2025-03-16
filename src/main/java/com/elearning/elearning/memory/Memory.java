@@ -23,14 +23,13 @@ import java.util.Set;
 public class Memory extends BaseEntity {
     private LocalDate date;
     private LocalTime time;
-    private String content;
     @ManyToOne
     private Training training;
     @ManyToOne
-    private Teacher frame;
+    private Teacher framer;
     @OneToMany
     private Set<Teacher> jury;
-    @OneToOne(cascade = CascadeType.ALL ,orphanRemoval = true)
+    @OneToOne
     private Student student;
-    private  boolean done = false;
+    private  boolean valid ;
 }
