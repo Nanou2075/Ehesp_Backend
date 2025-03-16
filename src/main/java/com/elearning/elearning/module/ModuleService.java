@@ -47,7 +47,12 @@ public class ModuleService implements IModuleService {
      */
 
     @Override
-    public void addModule(List<MultipartFile> videos,List<MultipartFile> books,List<MultipartFile> podcasts,MultipartFile cover,Module module) throws IOException {
+    public void addModule(
+                          MultipartFile cover,
+                          List<MultipartFile> videos,
+                          List<MultipartFile> books,
+                          List<MultipartFile> podcasts,
+                          Module module) throws IOException {
         if (moduleRepository.findByNameIgnoreCase(module.getName()).isPresent()){
            throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
         Module save = moduleRepository.save(module);

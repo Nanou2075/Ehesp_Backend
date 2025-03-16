@@ -11,10 +11,11 @@ import java.util.List;
 @RequestMapping("module/")
 public interface ModuleResource {
     @PostMapping(value = "save",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    Response addModule(@RequestParam(value = "videos",required = false) List<MultipartFile> videos,
+    Response addModule( @RequestParam(value = "cover",required = false)   MultipartFile cover,
+            @RequestParam(value = "videos",required = false) List<MultipartFile> videos,
                        @RequestParam(value = "books",required = false) List<MultipartFile> books,
                        @RequestParam(value = "podcasts",required = false) List<MultipartFile> podcasts,
-                       @RequestParam(value = "podcasts",required = false)   MultipartFile cover,
+
                        @RequestPart Module module ) throws IOException;
 
     @PostMapping(value = "addFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

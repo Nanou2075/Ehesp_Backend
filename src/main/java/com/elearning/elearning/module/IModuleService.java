@@ -11,7 +11,10 @@ import java.util.Set;
 @Transactional
 @Service
 public interface IModuleService {
-    void addModule(List<MultipartFile> videos,List<MultipartFile> books, List<MultipartFile> podcasts,MultipartFile cover,Module module) throws IOException;
+    void addModule(MultipartFile cover
+            ,List<MultipartFile> videos,
+                   List<MultipartFile> books,
+                   List<MultipartFile> podcasts,Module module) throws IOException;
 
     void addModuleFile(List<MultipartFile> files, String type, Module module) throws IOException;
 

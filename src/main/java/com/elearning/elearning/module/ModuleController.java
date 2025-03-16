@@ -21,12 +21,13 @@ private final IModuleService moduleService;
 private final LocalService localService;
 
     @Override
-    public Response addModule(List<MultipartFile> videos,
+    public Response addModule(
+                              MultipartFile cover,
+                              List<MultipartFile> videos,
                               List<MultipartFile> books,
                               List<MultipartFile> podcasts,
-                              MultipartFile cover,
                               Module module) throws IOException {
-        moduleService.addModule(videos,books,podcasts,cover,module);
+        moduleService.addModule(cover,videos,books,podcasts,module);
         return new Response(OK,localService.getMessage(TRAINING_SUCCESS));
     }
 
