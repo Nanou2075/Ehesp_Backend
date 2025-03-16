@@ -1,5 +1,6 @@
 package com.elearning.elearning.training;
 
+import com.elearning.elearning.teacher.Teacher;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -15,6 +16,7 @@ public class TrainingResponse {
     private String id;
     private String name;
     private BigDecimal price;
+    private Teacher coordinator;
 
 
 }

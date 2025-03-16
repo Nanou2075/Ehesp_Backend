@@ -91,6 +91,7 @@ public class TrainingService implements ITrainingService {
                             .id(training.getId())
                             .name(training.getName())
                             .price(training.getPrice())
+                            .coordinator(training.getCoordinator())
                     .build());
         });
         return trainingResponseList;
