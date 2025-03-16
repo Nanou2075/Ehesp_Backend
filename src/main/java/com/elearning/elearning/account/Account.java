@@ -26,6 +26,7 @@ public class Account extends UserBaseEntity {
     private boolean available= true;
     private String country;
     private String mail;
+    private String sex;
     private LocalDate birthday;
 
 }
