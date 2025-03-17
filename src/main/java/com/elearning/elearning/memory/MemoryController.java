@@ -1,8 +1,5 @@
 package com.elearning.elearning.memory;
 
-import com.elearning.elearning.domain.DomainRequest;
-import com.elearning.elearning.domain.DomainResource;
-import com.elearning.elearning.domain.DomainService;
 import com.elearning.elearning.exception.Response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +28,11 @@ public class MemoryController implements MemoryResource {
     @Override
     public Response getAll() {
         return memoryService.getAll();
+    }
+
+    @Override
+    public Response getStudentMemory() {
+        return memoryService.getStudentMemory();
     }
 
     @Override

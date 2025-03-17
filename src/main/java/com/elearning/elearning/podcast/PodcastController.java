@@ -19,6 +19,7 @@ import static com.elearning.elearning.messages.FileMessage.FILE_SUCCESS;
 @RequiredArgsConstructor
 public class PodcastController implements PodcastResource {
     private final PodcastService podcastService;
+    private final PodcastRepository podcastRepository;
     private final LocalService localService;
 
 
@@ -27,6 +28,11 @@ public class PodcastController implements PodcastResource {
     public Response change(String idFile, MultipartFile file) throws IOException {
         podcastService.changePodcast(idFile,file);
         return new Response(OK,localService.getMessage(FILE_SUCCESS)) ;
+    }
+
+    @Override
+    public Response getPodcastByModuleId(String id) throws IOException {
+        return podcastService.getAllByModuleId(id);
     }
 
     @Override
@@ -41,6 +47,14 @@ public class PodcastController implements PodcastResource {
     @Override
     public Mono<Resource> readPodcast(String id) throws IOException {
         return podcastService.readPodcast(id);
+    }
+
+
+
+    @Override
+    public Response  getPodcastAll () throws IOException {
+        return new Response(OK,podcastRepository.findAll());
+
     }
 
 

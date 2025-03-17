@@ -16,6 +16,9 @@ import java.util.Set;
 @Transactional
 public interface IPodcastService {
     void uploadPodcast (List<MultipartFile> files, Module module) throws IOException;
+
+    Response getAllByModuleId(String id);
+
     void changePodcast(String idFile, MultipartFile file) throws IOException;
     Mono<Resource> readPodcast(String id);
     Response getAllByModule();

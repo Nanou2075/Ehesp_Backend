@@ -3,14 +3,13 @@ package com.elearning.elearning.note;
 
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.security.authentication.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
@@ -24,6 +23,7 @@ import static com.elearning.elearning.note.NoteMessage.*;
 @Transactional
 public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;
+    private final AuthenticationService authenticationService;
 
 
 
@@ -87,6 +87,19 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Response getAll() {
         List<Note> notes = noteRepository.findAll(Sort.by("createdDate").ascending());
+        if (notes.isEmpty()) {
+            throw new NotFoundException(NO, NOTE_EMPTY);
+        }
+        return new Response(OK, notes);
+    }
+
+
+    /*
+recuperation de la liste   des sections
+*/
+    @Override
+    public Response getStudentNotes() {
+        List<Note> notes = noteRepository.findByStudent(authenticationService.currentStudent());
         if (notes.isEmpty()) {
             throw new NotFoundException(NO, NOTE_EMPTY);
         }

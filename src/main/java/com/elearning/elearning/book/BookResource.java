@@ -13,11 +13,16 @@ public interface BookResource {
     @PostMapping("change")
     Response changeBook(@RequestBody String idFile, MultipartFile file) throws IOException;
 
-    @PostMapping("module")
+    @GetMapping("module/{id}")
+    Response getBookByModuleId(@PathVariable String id) throws IOException;
+
+    @GetMapping("module")
     Response getBookByModule() throws IOException;
 
     @GetMapping(value = "{id}",produces ={MediaType.APPLICATION_PDF_VALUE})
     byte[] getBook(@PathVariable String id) throws IOException;
 
+    @GetMapping("all")
+    Response   getBookAll() throws IOException;
 
 }

@@ -18,4 +18,8 @@ public interface NoteService {
     Response getAll();
 
 
+    /*
+    recuperation de la liste   des sections
+    */
+    Response getStudentNotes();
 }

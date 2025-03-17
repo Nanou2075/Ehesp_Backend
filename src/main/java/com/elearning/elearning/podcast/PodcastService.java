@@ -74,6 +74,18 @@ public class PodcastService implements IPodcastService {
 
 
 
+    @Override
+    public Response getAllByModuleId(String id) {
+        Set<Podcast> allByModuleId = podcastRepository.findAllByModuleId(id);
+        if (allByModuleId.isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        Set<Podcast> podcasts= new HashSet<>(allByModuleId);
+
+        return new Response(OK, convertToResponse(podcasts));
+    }
+
+
+
 
     @Override
     public void changePodcast(String idFile, MultipartFile file) throws IOException {

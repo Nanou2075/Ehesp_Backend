@@ -15,9 +15,15 @@ public interface PodcastResource {
     @PostMapping("change")
     Response change(@RequestBody String idFile, MultipartFile file) throws IOException;
 
-    @PostMapping("module")
+    @GetMapping("module/{id}")
+    Response getPodcastByModuleId(@PathVariable String id) throws IOException;
+
+    @GetMapping("module")
     Response getPodcastByModule() throws IOException;
 
     @GetMapping(value = "{id}",produces = "video/mp4")
     Mono<Resource> readPodcast(@PathVariable String id) throws IOException;
+
+    @GetMapping("all")
+    Response   getPodcastAll() throws IOException;
 }

@@ -1,6 +1,7 @@
 package com.elearning.elearning.note;
 
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.module.Module;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
@@ -26,6 +27,8 @@ import java.util.Set;
 public class Note extends BaseEntity {
     private float value;
     private String type;
-    @OneToOne
+    @ManyToOne
+    private Module module;
+    @ManyToOne
     private Student student;
 }

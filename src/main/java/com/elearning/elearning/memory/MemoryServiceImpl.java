@@ -3,6 +3,7 @@ package com.elearning.elearning.memory;
 
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.security.authentication.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -24,6 +25,7 @@ import static com.elearning.elearning.memory.MemoryMessage.*;
 @Transactional
 public class MemoryServiceImpl implements MemoryService {
     private final MemoryRepository memoryRepository;
+    private final AuthenticationService authenticationService;
 
 
 
@@ -87,6 +89,24 @@ public class MemoryServiceImpl implements MemoryService {
     @Override
     public Response getAll() {
         List<Memory> memories = memoryRepository.findAll(Sort.by("createdDate").ascending());
+        if (memories.isEmpty()) {
+            throw new NotFoundException(NO, MEMORY_EMPTY);
+        }
+        memories.forEach(memory -> {
+            if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
+                memory.setValid(true);
+                memoryRepository.save(memory);
+            }
+        });
+        return new Response(OK, memories);
+    }
+
+    /*
+recuperation de la liste   des sections
+*/
+    @Override
+    public Response getStudentMemory() {
+        List<Memory> memories = memoryRepository.findByStudent(authenticationService.currentStudent());
         if (memories.isEmpty()) {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }

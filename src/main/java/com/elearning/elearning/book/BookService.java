@@ -9,6 +9,7 @@ import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.module.Module;
 import com.elearning.elearning.module.ModuleRepository;
 import com.elearning.elearning.security.authentication.AuthenticationService;
+import com.elearning.elearning.video.Video;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
@@ -138,17 +139,31 @@ public class BookService implements IBookService {
 
     }
 
+
+    @Override
+    public Response getAllByModuleId(String id) {
+        Set<Book> allByModuleId = bookRepository.findAllByModuleId(id);
+        if (allByModuleId.isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        Set<Book> books = new HashSet<>(allByModuleId);
+
+        return new Response(OK, convertToResponse(books));
+    }
+
     @Override
     public Response getAllByModule() {
-        Set<Book> podcasts = new HashSet<>();
+        Set<Book> modules = new HashSet<>();
         Set<Module> allModule = moduleRepository.findAllByTraining(authenticationService.currentTraining());
         if (allModule.isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         allModule.forEach(module -> {
-            podcasts.addAll(bookRepository.findAllByModule(module));
+            modules.addAll(bookRepository.findAllByModule(module));
         });
-        return new Response(OK,convertToResponse(podcasts)) ;
+        return new Response(OK, convertToResponse(modules));
     }
+
+
+
 
     public Set<BookResponse> convertToResponse(Set<Book> bookSet) {
         Set<BookResponse> bookResponseSet = new HashSet<>();

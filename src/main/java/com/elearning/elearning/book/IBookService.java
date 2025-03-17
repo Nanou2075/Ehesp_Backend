@@ -16,5 +16,8 @@ public interface IBookService {
     void uploadBook (List<MultipartFile> files, Module module) throws IOException;
     void changeBook(String idFile, MultipartFile file);
     byte[] getBook(String id) throws IOException;
+
+    Response getAllByModuleId(String id);
+
     Response getAllByModule();
 }

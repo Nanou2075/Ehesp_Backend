@@ -31,6 +31,11 @@ public class NoteController implements NoteResource {
     }
 
     @Override
+    public Response getStudentNotes() {
+        return noteService.getStudentNotes();
+    }
+
+    @Override
     public Response delete(String id) {
         return noteService.delete(id);
     }

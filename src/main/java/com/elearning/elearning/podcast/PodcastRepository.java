@@ -7,4 +7,5 @@ import java.util.Set;
 
 public interface PodcastRepository extends JpaRepository<Podcast,String> {
     Set<Podcast> findAllByModule(Module module);
+    Set<Podcast> findAllByModuleId(String id);
 }

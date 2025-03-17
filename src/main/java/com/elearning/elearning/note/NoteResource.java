@@ -19,6 +19,9 @@ public interface NoteResource {
     @GetMapping("all")
     Response getAll();
 
+    @GetMapping("student")
+    Response getStudentNotes();
+
     @DeleteMapping("{id}")
     Response delete(@PathVariable String id);
 

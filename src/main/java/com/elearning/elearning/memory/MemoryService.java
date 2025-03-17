@@ -18,4 +18,8 @@ public interface MemoryService {
     Response getAll();
 
 
+    /*
+    recuperation de la liste   des sections
+    */
+    Response getStudentMemory();
 }
