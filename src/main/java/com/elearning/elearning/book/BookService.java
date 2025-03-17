@@ -114,7 +114,7 @@ public class BookService implements IBookService {
      */
 
     public boolean delete (String filename) throws IOException {
-        return new File(FOLDER_BOOK_PATH + filename).delete();
+        return new File(FOLDER_BOOK_PATH+"/" + filename).delete();
     }
 
     /**
