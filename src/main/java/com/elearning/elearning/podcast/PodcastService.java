@@ -87,7 +87,11 @@ public class PodcastService implements IPodcastService {
     @Override
     public  void  deletePodcast(String id) throws IOException {
         Podcast podcast = podcastRepository.findPodcastById(id);
-        delete(podcast.getFileName());
+        try {
+            delete(podcast.getFileName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         podcastRepository.delete(podcast);
     }
 

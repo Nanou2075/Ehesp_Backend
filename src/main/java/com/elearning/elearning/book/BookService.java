@@ -74,7 +74,11 @@ public class BookService implements IBookService {
     @Override
     public  void  deleteBook(String id) throws IOException {
        Book book = bookRepository.findBookById(id);
-        delete(book.getFileName());
+        try {
+            delete(book.getFileName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         bookRepository.delete(book);
     }
 

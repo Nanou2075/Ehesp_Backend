@@ -156,7 +156,11 @@ public class VideoService implements IVideoService {
     @Override
     public  void  deleteVideo(String id) throws IOException {
         Video video = videoRepository.findVideoById(id);
-        delete(video.getFileName());
+        try {
+            delete(video.getFileName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         videoRepository.delete(video);
     }
 
