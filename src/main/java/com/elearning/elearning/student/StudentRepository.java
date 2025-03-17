@@ -13,5 +13,7 @@ public interface StudentRepository extends JpaRepository<Student,String> {
     Page<Student> findAllByAvailableTrue(Pageable pageable);
     List<Student> findAllByAvailableTrue();
     List<Student> findAllByTraining(Training training);
+    List<Student> findAllByTrainingDomain(Domain domain);
+
 
 }

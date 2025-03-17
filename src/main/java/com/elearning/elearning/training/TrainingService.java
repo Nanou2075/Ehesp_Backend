@@ -5,6 +5,7 @@ import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
+import com.elearning.elearning.student.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import static com.elearning.elearning.training.TrainingMessage.*;
 @Service
 public class TrainingService implements ITrainingService {
     private final TrainingRepository trainingRepository;
+    private final StudentRepository studentRepository;
+
     private final LocalService localService;
 
 
@@ -36,6 +39,21 @@ public class TrainingService implements ITrainingService {
         if (trainingRepository.findByNameIgnoreCase(training.getName()).isPresent()){
            throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
             trainingRepository.save(training);
+    }
+
+
+
+
+    @Override
+    public Set<TrainingValue> getTrainingStatical() {
+        Set<TrainingValue> values = new HashSet<>();
+        TrainingValue value = new TrainingValue();
+        trainingRepository.findAll().forEach(training -> {
+            value.setNumber( studentRepository.findAllByTraining(training).isEmpty() ?0: studentRepository.findAllByTraining(training).size());
+            value.setName(training.getName());
+        });
+        values.add(value);
+return values;
     }
 
 

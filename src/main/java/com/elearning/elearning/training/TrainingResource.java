@@ -23,4 +23,6 @@ public interface TrainingResource {
 
     @GetMapping("all")
     Response getAllTraining();
+    @GetMapping("statistical")
+    Response getTrainingStatical();
 }

@@ -10,6 +10,7 @@ import java.util.Set;
 @Service
 public interface ITrainingService {
     void addTraining(Training training);
+    Set<TrainingValue> getTrainingStatical();
     void updateTraining(String id, Training training);
     Training getTraining(String id);
     void removeTraining(String id);

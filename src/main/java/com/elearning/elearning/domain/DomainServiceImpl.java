@@ -3,13 +3,16 @@ package com.elearning.elearning.domain;
 
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.student.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.exception.Response.Security.OK;
@@ -22,6 +25,8 @@ import static com.elearning.elearning.domain.DomainMessage.*;
 @Transactional
 public class DomainServiceImpl implements DomainService {
     private final DomainRepository domainRepository;
+    private final StudentRepository studentRepository;
+
 
 
 
@@ -82,6 +87,20 @@ public class DomainServiceImpl implements DomainService {
             throw new NotFoundException(NO, DOMAIN_NO_EXIT);
         }
         return new Response(OK, domain);
+    }
+
+
+
+    @Override
+    public Set<DomainValue> getDomainStatical() {
+        Set<DomainValue> values = new HashSet<>();
+        DomainValue value = new DomainValue();
+        domainRepository.findAll().forEach(training -> {
+            value.setNumber( studentRepository.findAllByTrainingDomain(training).isEmpty() ?0: studentRepository.findAllByTrainingDomain(training).size());
+            value.setName(training.getName());
+        });
+        values.add(value);
+        return values;
     }
 
 

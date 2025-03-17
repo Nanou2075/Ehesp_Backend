@@ -42,7 +42,6 @@ private final LocalService localService;
 
     @Override
     public Response getTraining(String id) {
-
         return new Response(OK, trainingService.getTraining(id));
 
     }
@@ -50,5 +49,10 @@ private final LocalService localService;
     @Override
     public Response getAllTraining() {
         return new Response(OK, trainingService.getAll());
+    }
+
+    @Override
+    public Response getTrainingStatical() {
+        return new Response(OK, trainingService.getTrainingStatical());
     }
 }

@@ -4,6 +4,8 @@ import com.elearning.elearning.exception.Response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.elearning.elearning.exception.Response.Security.OK;
+
 @RequiredArgsConstructor
 @RestController
 public class DomainController implements DomainResource {
@@ -38,6 +40,11 @@ public class DomainController implements DomainResource {
     @Override
     public Response search(String key) {
         return domainService.search(key);
+    }
+
+    @Override
+    public Response getDomainStatical() {
+        return new Response(OK, domainService.getDomainStatical());
     }
 }
 

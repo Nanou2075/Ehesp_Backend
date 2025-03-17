@@ -24,4 +24,6 @@ public interface DomainResource {
 
     @PostMapping("search")
     Response search (@RequestBody String key);
+    @GetMapping("statistical")
+    Response getDomainStatical();
 }

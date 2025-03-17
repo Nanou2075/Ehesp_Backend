@@ -13,5 +13,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class DomainValue {
     private String name;
-    private int value;
+    private int Number;
 }
