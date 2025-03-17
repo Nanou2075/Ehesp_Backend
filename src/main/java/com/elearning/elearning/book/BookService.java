@@ -9,10 +9,8 @@ import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.module.Module;
 import com.elearning.elearning.module.ModuleRepository;
 import com.elearning.elearning.security.authentication.AuthenticationService;
-import com.elearning.elearning.video.Video;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +35,6 @@ import static com.elearning.elearning.uitils.FileUtils.*;
 public class BookService implements IBookService {
     private final BookRepository bookRepository;
     private final LocalService localService;
-    private final ResourceLoader resourceLoader;
     private final CommService commService;
     private final AuthenticationService authenticationService;
     private final ModuleRepository moduleRepository;
@@ -72,6 +69,13 @@ public class BookService implements IBookService {
         });
 
 
+    }
+
+    @Override
+    public  void  deleteBook(String id) throws IOException {
+       Book book = bookRepository.findBookById(id);
+        delete(book.getFileName());
+        bookRepository.delete(book);
     }
 
 

@@ -18,6 +18,8 @@ public interface BookResource {
 
     @GetMapping("module")
     Response getBookByModule() throws IOException;
+    @DeleteMapping("{id}")
+    Response  delete(@PathVariable String id) throws IOException;
 
     @GetMapping(value = "{id}",produces ={MediaType.APPLICATION_PDF_VALUE})
     byte[] getBook(@PathVariable String id) throws IOException;

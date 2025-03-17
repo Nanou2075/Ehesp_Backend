@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 import static com.elearning.elearning.exception.Response.Security.OK;
+import static com.elearning.elearning.messages.FileMessage.FILE_DELETE;
 import static com.elearning.elearning.messages.FileMessage.FILE_SUCCESS;
 
 
@@ -39,6 +40,12 @@ public class BookController implements BookResource {
     }
 
 
+
+    @Override
+    public Response  delete (String id) throws IOException {
+        bookService.deleteBook(id);
+        return new Response(OK,localService.getMessage(FILE_DELETE)) ;
+    }
 
     @Override
     public byte[] getBook(String id) throws IOException {

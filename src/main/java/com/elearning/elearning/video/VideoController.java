@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 
 import static com.elearning.elearning.exception.Response.Security.OK;
+import static com.elearning.elearning.messages.FileMessage.FILE_DELETE;
 import static com.elearning.elearning.messages.FileMessage.FILE_SUCCESS;
 
 
@@ -53,6 +54,12 @@ public class VideoController implements VideoResource {
     public Response  getVideoAll () throws IOException {
         return new Response(OK,videoRepository.findAll());
 
+    }
+
+    @Override
+    public Response  delete (String id) throws IOException {
+        videoService.deleteVideo(id);
+        return new Response(OK,localService.getMessage(FILE_DELETE)) ;
     }
 
 

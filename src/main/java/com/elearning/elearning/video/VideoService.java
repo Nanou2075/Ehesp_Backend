@@ -153,6 +153,13 @@ public class VideoService implements IVideoService {
         return new Response(OK, convertToResponse(videos));
     }
 
+    @Override
+    public  void  deleteVideo(String id) throws IOException {
+        Video video = videoRepository.findVideoById(id);
+        delete(video.getFileName());
+        videoRepository.delete(video);
+    }
+
 
 
     @Override

@@ -8,4 +8,5 @@ import java.util.Set;
 public interface BookRepository extends JpaRepository<Book,String> {
     Set<Book> findAllByModule(Module module);
     Set<Book> findAllByModuleId(String id);
+    Book findBookById(String id);
 }

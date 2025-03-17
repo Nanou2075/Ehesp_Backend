@@ -20,5 +20,7 @@ public interface IVideoService {
     Mono<Resource> readVideo(String id) throws IOException;
     Response getAllByModule();
 
+    void  deleteVideo(String id) throws IOException;
+
     Response getAllByModuleId(String id);
 }

@@ -84,6 +84,13 @@ public class PodcastService implements IPodcastService {
         return new Response(OK, convertToResponse(podcasts));
     }
 
+    @Override
+    public  void  deletePodcast(String id) throws IOException {
+        Podcast podcast = podcastRepository.findPodcastById(id);
+        delete(podcast.getFileName());
+        podcastRepository.delete(podcast);
+    }
+
 
 
 

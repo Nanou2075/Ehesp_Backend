@@ -27,4 +27,7 @@ public interface VideoResource {
 
     @GetMapping("all")
     Response   getVideoAll() throws IOException;
+
+    @DeleteMapping("{id}")
+    Response  delete(@PathVariable String id) throws IOException;
 }

@@ -19,6 +19,8 @@ public interface IPodcastService {
 
     Response getAllByModuleId(String id);
 
+    void  deletePodcast(String id) throws IOException;
+
     void changePodcast(String idFile, MultipartFile file) throws IOException;
     Mono<Resource> readPodcast(String id);
     Response getAllByModule();

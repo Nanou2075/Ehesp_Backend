@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 
 import static com.elearning.elearning.exception.Response.Security.OK;
+import static com.elearning.elearning.messages.FileMessage.FILE_DELETE;
 import static com.elearning.elearning.messages.FileMessage.FILE_SUCCESS;
 
 
@@ -55,6 +56,12 @@ public class PodcastController implements PodcastResource {
     public Response  getPodcastAll () throws IOException {
         return new Response(OK,podcastRepository.findAll());
 
+    }
+
+    @Override
+    public Response  delete (String id) throws IOException {
+        podcastService.deletePodcast(id);
+        return new Response(OK,localService.getMessage(FILE_DELETE)) ;
     }
 
 
