@@ -59,9 +59,10 @@ public class AccountController implements AccountResource{
     @Override
     public Response getStatistical() {
         Map<String, Object> values = new HashMap<>();
-        values.put(Admin.class.getName(), adminRepository.findAll());
-        values.put(Teacher.class.getName(), teacherRepository.findAll());
-        values.put(String.class.getName(), studentRepository.findAllByAvailableTrue());
+        values.put("user", adminRepository.findAll().size());
+        values.put("teacher", teacherRepository.findAll().size());
+        values.put("student", studentRepository.findAllByAvailableTrue().size());
+        values.put("all", studentRepository.findAllByAvailableTrue().size()+teacherRepository.findAll().size()+studentRepository.findAll().size());
         return new Response(OK,values);
     }
 
