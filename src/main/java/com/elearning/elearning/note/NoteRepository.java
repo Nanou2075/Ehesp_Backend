@@ -1,4 +1,4 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

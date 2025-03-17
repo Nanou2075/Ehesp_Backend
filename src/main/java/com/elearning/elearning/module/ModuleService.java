@@ -156,6 +156,8 @@ public class ModuleService implements IModuleService {
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 
+
+
     public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
         Set<ModuleResponse> moduleResponseList = new HashSet<>();
         moduleList.forEach(module -> {

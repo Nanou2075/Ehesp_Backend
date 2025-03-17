@@ -1,4 +1,4 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

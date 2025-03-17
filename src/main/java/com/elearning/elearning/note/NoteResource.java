@@ -1,4 +1,4 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 
 import com.elearning.elearning.exception.Response.Response;
@@ -16,7 +16,7 @@ public interface NoteResource {
     @GetMapping("{id}")
     Response get(@PathVariable String id);
 
-    @GetMapping("list")
+    @GetMapping("all")
     Response getAll();
 
     @DeleteMapping("{id}")

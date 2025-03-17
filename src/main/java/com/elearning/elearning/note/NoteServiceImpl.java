@@ -1,4 +1,4 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 
 import com.elearning.elearning.exception.NotFoundException;
@@ -9,11 +9,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.exception.Response.Security.OK;
-import static com.elearning.elearning.memory.MemoryMessage.*;
+import static com.elearning.elearning.note.NoteMessage.*;
 
 
 @Service
@@ -35,7 +37,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Response save(Note note) {
         noteRepository.save(note);
-        return new Response(OK, MEMORY_SAVE);
+        return new Response(OK, NOTE_SAVE);
     }
 
 
@@ -44,10 +46,9 @@ public class NoteServiceImpl implements NoteService {
    */
     @Override
     public Response update(String id, Note value) {
-
         Note note = noteRepository.findById(id);
         noteRepository.save(note);
-        return new Response(OK, MEMORY_UPDATE);
+        return new Response(OK, NOTE_UPDATE);
     }
 
 
@@ -60,10 +61,10 @@ public class NoteServiceImpl implements NoteService {
     public Response delete(String id) {
         Note note = noteRepository.findById(id);
         if (note == null) {
-            throw new NotFoundException(NO, MEMORY_NO_EXIT);
+            throw new NotFoundException(NO, NOTE_NO_EXIT);
         }
         noteRepository.delete(note);
-        return new Response(OK, MEMORY_DELETE);
+        return new Response(OK, NOTE_DELETE);
     }
 
 
@@ -74,7 +75,7 @@ public class NoteServiceImpl implements NoteService {
     public Response get(String id) {
         Note note = noteRepository.findById(id);
         if (note == null) {
-            throw new NotFoundException(NO, MEMORY_NO_EXIT);
+            throw new NotFoundException(NO, NOTE_NO_EXIT);
         }
         return new Response(OK, note);
     }
@@ -85,10 +86,10 @@ public class NoteServiceImpl implements NoteService {
    */
     @Override
     public Response getAll() {
-        List<Note> memories = noteRepository.findAll(Sort.by("name").ascending());
-        if (memories.isEmpty()) {
-            throw new NotFoundException(NO, MEMORY_EMPTY);
+        List<Note> notes = noteRepository.findAll(Sort.by("createdDate").ascending());
+        if (notes.isEmpty()) {
+            throw new NotFoundException(NO, NOTE_EMPTY);
         }
-        return new Response(OK, memories);
+        return new Response(OK, notes);
     }
 }

@@ -1,4 +1,4 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 import com.elearning.elearning.exception.Response.Response;
 import org.springframework.stereotype.Service;

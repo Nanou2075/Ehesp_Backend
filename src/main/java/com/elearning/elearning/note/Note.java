@@ -1,17 +1,20 @@
-package com.elearning.elearning.notes;
+package com.elearning.elearning.note;
 
 import com.elearning.elearning.common.BaseEntity;
-import com.elearning.elearning.module.Module;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.teacher.Teacher;
 import com.elearning.elearning.training.Training;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 
@@ -21,12 +24,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Note extends BaseEntity {
-    @ManyToOne
-    private Module training;
-    @ManyToOne
-    private Student student;
-    private String remark;
-    private double value;
+    private float value;
     private String type;
-
+    @OneToOne
+    private Student student;
 }
