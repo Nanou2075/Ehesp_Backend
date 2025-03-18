@@ -10,6 +10,7 @@ import com.elearning.elearning.degree.DegreeService;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.exception.enums.Permission;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.document.DocumentService;
 import com.elearning.elearning.training.Training;
@@ -29,10 +30,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.*;
 
-import static com.elearning.elearning.exception.Response.Security.NO;
-import static com.elearning.elearning.exception.Response.Security.OK;
+import static com.elearning.elearning.exception.Response.Security.*;
 import static com.elearning.elearning.exception.enums.Permission.STUDENT;
 import static com.elearning.elearning.messages.AccountMessage.*;
 
@@ -97,6 +98,11 @@ public class StudentService implements IStudentService {
                     Account account = accountRepository.findByPhoneOrMailIgnoreCase(student.getPhone(), student.getMail());
                     account.setPassword(passwordEncoder.encode(password));
                     account.setAvailable(true);
+                    account.setActivated(true);
+                    account.setAttempt(T);
+                    account.setNotLocked(true);
+                    account.setAttemptDateExp(Instant.now());
+                    account.setActivated(true);
                     accountRepository.save(account);
                     studentRepository.save(student);
                     try {
