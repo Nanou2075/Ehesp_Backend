@@ -47,12 +47,15 @@ public class TrainingService implements ITrainingService {
     @Override
     public Set<TrainingValue> getTrainingStatical() {
         Set<TrainingValue> values = new HashSet<>();
-        TrainingValue value = new TrainingValue();
         trainingRepository.findAll().forEach(training -> {
-            value.setNumber( studentRepository.findAllByTraining(training).isEmpty() ?0: studentRepository.findAllByTraining(training).size());
-            value.setName(training.getName());
+            values.add(TrainingValue.builder()
+                    .name(training.getName())
+                    .number(studentRepository.findAllByTraining(training).isEmpty() ? NO: studentRepository.findAllByTraining(training).size())
+                    .build());
+
+
         });
-        values.add(value);
+
 return values;
     }
 
