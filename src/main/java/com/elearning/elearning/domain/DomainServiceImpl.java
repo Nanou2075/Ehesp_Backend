@@ -3,6 +3,7 @@ package com.elearning.elearning.domain;
 
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.level.Level;
 import com.elearning.elearning.student.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
@@ -87,6 +89,29 @@ public class DomainServiceImpl implements DomainService {
             throw new NotFoundException(NO, DOMAIN_NO_EXIT);
         }
         return new Response(OK, domain);
+    }
+
+
+
+    @Override
+    public Set<DomainResponse> getAllByLevel(Level level) {
+        if (domainRepository.findAllByLevel(level).isEmpty())
+            throw new NotFoundException(NO,DOMAIN_EMPTY);
+        return convertToResponse(Optional.of(domainRepository.findAllByLevel(level))
+                .orElseThrow(() -> new NotFoundException(NO, DOMAIN_NOT_FOUND)));
+    }
+
+
+    public Set<DomainResponse> convertToResponse(List<Domain> domainList) {
+        Set<DomainResponse> domainResponseSet = new HashSet<>();
+        domainList.forEach(domain -> {
+            domainResponseSet.add(DomainResponse.builder()
+                    .id(domain.getId())
+                    .name(domain.getName())
+                    .level(domain.getLevel())
+                    .build());
+        });
+        return domainResponseSet;
     }
 
 

@@ -14,7 +14,6 @@ public interface LevelResource {
     @DeleteMapping("{id}")
     Response removeTraining(@PathVariable String id );
 
-
     @GetMapping("{id}")
     Response getTraining(@PathVariable String id );
 

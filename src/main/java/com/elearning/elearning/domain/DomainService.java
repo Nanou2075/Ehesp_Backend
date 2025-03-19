@@ -1,6 +1,7 @@
 package com.elearning.elearning.domain;
 
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.level.Level;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public interface DomainService {
     Response delete(String id);
 
     Response get(String id);
+
+    Set<DomainResponse> getAllByLevel(Level level);
 
     Set<DomainValue> getDomainStatical();
 

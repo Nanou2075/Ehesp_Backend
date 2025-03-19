@@ -14,7 +14,7 @@ public interface DomainRepository extends JpaRepository<Domain, Long>{
     @Query("select section from Domain  section where section.name= :param " )
     List<Domain> search (@Param("param") String keyword);
     Domain findById(String id);
-    Set<Domain> findAllByLevel(Level level);
+    List<Domain> findAllByLevel(Level level);
 
 
 }

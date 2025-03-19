@@ -1,6 +1,7 @@
 package com.elearning.elearning.domain;
 
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.level.Level;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,6 +46,11 @@ public class DomainController implements DomainResource {
     @Override
     public Response getDomainStatical() {
         return new Response(OK, domainService.getDomainStatical());
+    }
+
+    @Override
+    public Response getDomainByLevel(Level level) {
+        return new Response(OK, domainService.getAllByLevel(level));
     }
 }
 

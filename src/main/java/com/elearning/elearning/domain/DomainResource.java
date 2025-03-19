@@ -2,6 +2,7 @@ package com.elearning.elearning.domain;
 
 
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.level.Level;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,4 +27,7 @@ public interface DomainResource {
     Response search (@RequestBody String key);
     @GetMapping("statistical")
     Response getDomainStatical();
+
+    @PostMapping("level")
+    Response getDomainByLevel (@RequestBody Level level);
 }
