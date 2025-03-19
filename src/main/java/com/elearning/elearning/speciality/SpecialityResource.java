@@ -2,9 +2,10 @@ package com.elearning.elearning.speciality;
 
 import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.mention.Mention;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("training/")
+@RequestMapping("speciality/")
 public interface SpecialityResource {
     @PostMapping("save")
     Response addTraining(@RequestBody Speciality speciality);
@@ -17,6 +18,9 @@ public interface SpecialityResource {
 
     @PostMapping("domain")
     Response getTrainingByDomain(@RequestBody Domain domain);
+
+    @PostMapping("speciality")
+    Response getTrainingByMention(@RequestBody Mention mention);
 
     @GetMapping("{id}")
     Response getTraining(@PathVariable String id );

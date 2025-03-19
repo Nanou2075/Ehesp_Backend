@@ -5,7 +5,7 @@ import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.level.Level;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("speciality/")
+@RequestMapping("mention/")
 public interface MentionResource {
     @PostMapping("save")
     Response addTraining(@RequestBody Mention mention);

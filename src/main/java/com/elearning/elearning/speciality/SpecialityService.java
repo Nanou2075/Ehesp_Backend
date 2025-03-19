@@ -5,6 +5,7 @@ import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
+import com.elearning.elearning.mention.Mention;
 import com.elearning.elearning.student.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -124,6 +125,15 @@ return values;
         if (specialityRepository.findAllByMentionDomain(domain).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         return convertToResponse(Optional.of(specialityRepository.findAllByMentionDomain(domain))
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+    }
+
+
+    @Override
+    public Set<SpecialityResponse> getAllByMention(Mention mention) {
+        if (specialityRepository.findAllByMention(mention).isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        return convertToResponse(Optional.of(specialityRepository.findAllByMention(mention))
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 }

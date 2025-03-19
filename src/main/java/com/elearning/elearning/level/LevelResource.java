@@ -1,6 +1,5 @@
 package com.elearning.elearning.level;
 
-import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
 import org.springframework.web.bind.annotation.*;
 

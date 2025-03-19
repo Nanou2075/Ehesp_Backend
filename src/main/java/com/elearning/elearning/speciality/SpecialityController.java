@@ -4,6 +4,7 @@ package com.elearning.elearning.speciality;
 import com.elearning.elearning.domain.Domain;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
+import com.elearning.elearning.mention.Mention;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,11 @@ private final LocalService localService;
     @Override
     public Response getTrainingByDomain(Domain domain) {
         return new Response(OK, trainingService.getAllByDomain(domain));
+    }
+
+    @Override
+    public Response getTrainingByMention(Mention mention) {
+        return new Response(OK, trainingService.getAllByMention(mention));
     }
 
     @Override
