@@ -25,10 +25,9 @@ public class Memory extends BaseEntity {
     private LocalTime time;
     @ManyToOne
     private Speciality speciality;
-    @ManyToOne
-    private Teacher framer;
-    @OneToMany
-    private Set<Teacher> jury;
+    private String framer;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String>  jury;
     @OneToOne
     private Student student;
     private  boolean valid ;
