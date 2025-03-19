@@ -10,7 +10,7 @@ import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.podcast.PodcastRepository;
 import com.elearning.elearning.podcast.PodcastService;
 import com.elearning.elearning.security.authentication.AuthenticationService;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.video.VideoRepository;
 import com.elearning.elearning.video.VideoService;
 import jakarta.transaction.Transactional;
@@ -23,10 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
-import static com.elearning.elearning.training.TrainingMessage.*;
+import static com.elearning.elearning.speciality.SpecialityMessage.*;
 
 
 @Transactional
@@ -141,8 +140,8 @@ public class ModuleService implements IModuleService {
 
 
     @Override
-    public Set<ModuleResponse> getAllByTraining(Training training) {
-        if (moduleRepository.findAllByTraining(training).isEmpty())
+    public Set<ModuleResponse> getAllByTraining(Speciality speciality) {
+        if (moduleRepository.findAllBySpeciality(speciality).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAll()))
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
@@ -151,9 +150,9 @@ public class ModuleService implements IModuleService {
 
     @Override
     public Set<ModuleResponse> getAllByStudent() {
-        if (moduleRepository.findAllByTraining(authenticationService.currentTraining()).isEmpty())
+        if (moduleRepository.findAllBySpeciality(authenticationService.currentTraining()).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(moduleRepository.findAllByTraining(authenticationService.currentTraining()));
+        return convertToResponse(moduleRepository.findAllBySpeciality(authenticationService.currentTraining()));
     }
 
 
@@ -163,7 +162,7 @@ public class ModuleService implements IModuleService {
         moduleList.forEach(module -> {
             moduleResponseList.add(ModuleResponse.builder()
                             .id(module.getId())
-                            .training(module.getTraining())
+                            .speciality(module.getSpeciality())
                             .name(module.getName())
                             .teacher(module.getTeacher())
                             .numberOfVideo(videoRepository.findAllByModule(module).size())

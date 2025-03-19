@@ -2,8 +2,7 @@ package com.elearning.elearning.student;
 
 import com.elearning.elearning.account.Account;
 import com.elearning.elearning.document.Document;
-import com.elearning.elearning.memory.Memory;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Entity
 public class Student extends Account {
     @ManyToOne
-    private Training training;
+    private Speciality speciality;
     @OneToOne(cascade = CascadeType.ALL ,orphanRemoval = true)
     private Document document;
 

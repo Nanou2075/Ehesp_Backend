@@ -3,7 +3,7 @@ package com.elearning.elearning.student;
 
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.i18n.LocalService;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,7 +56,7 @@ public class StudentController implements IStudentResource {
     }
 
     @Override
-    public Response getAllStudentByTraining(Training training) {
-        return new Response(OK,studentService.getAllStudentByTraining(training));
+    public Response getAllStudentByTraining(Speciality speciality) {
+        return new Response(OK,studentService.getAllStudentByTraining(speciality));
     }
 }

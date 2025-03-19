@@ -1,8 +1,6 @@
 package com.elearning.elearning.student;
 
 
-import com.elearning.elearning.document.IDocumentResponse;
-import com.elearning.elearning.training.Training;
 import lombok.*;
 
 import java.time.LocalDate;

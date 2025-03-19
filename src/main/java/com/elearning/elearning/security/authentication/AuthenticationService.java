@@ -10,7 +10,7 @@ import com.elearning.elearning.security.accessToken.AccessTokenService;
 import com.elearning.elearning.security.refreshToken.RefreshTokenService;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.student.StudentRepository;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -72,10 +72,10 @@ public class AuthenticationService implements UserDetailsService {
     }
 
 
-    public Training currentTraining() throws NotFoundException {
+    public Speciality currentTraining() throws NotFoundException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
-        return Optional.ofNullable(studentRepository.findStudentById(principal).getTraining())
+        return Optional.ofNullable(studentRepository.findStudentById(principal).getSpeciality())
                 .orElseThrow(() -> new NotFoundException(NO,localService.getMessage(USER_NOT_FOUND)));
     }
     public Student currentStudent() throws NotFoundException {

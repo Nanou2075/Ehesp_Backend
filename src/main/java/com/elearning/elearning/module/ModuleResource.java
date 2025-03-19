@@ -1,7 +1,7 @@
 package com.elearning.elearning.module;
 
 import com.elearning.elearning.exception.Response.Response;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +38,7 @@ public interface ModuleResource {
     Response getAllModule();
 
     @PostMapping("training")
-    Response getAllModuleByTraining(@RequestBody Training training);
+    Response getAllModuleByTraining(@RequestBody Speciality speciality);
 
     @GetMapping("student")
     Response getAllModuleByStudent();

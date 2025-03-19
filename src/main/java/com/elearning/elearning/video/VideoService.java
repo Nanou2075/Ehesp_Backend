@@ -28,7 +28,7 @@ import java.util.Set;
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.exception.Response.Security.OK;
 import static com.elearning.elearning.messages.FileMessage.FILE_NOT_FOUND;
-import static com.elearning.elearning.training.TrainingMessage.TRAINING_EMPTY;
+import static com.elearning.elearning.speciality.SpecialityMessage.TRAINING_EMPTY;
 import static com.elearning.elearning.uitils.FileUtils.*;
 
 
@@ -144,7 +144,7 @@ public class VideoService implements IVideoService {
     @Override
     public Response getAllByModule() {
         Set<Video> videos = new HashSet<>();
-        Set<Module> allModule = moduleRepository.findAllByTraining(authenticationService.currentTraining());
+        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentTraining());
         if (allModule.isEmpty())
                 throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
            allModule.forEach(module -> {

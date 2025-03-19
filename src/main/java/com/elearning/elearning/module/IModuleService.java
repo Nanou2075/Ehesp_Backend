@@ -1,6 +1,6 @@
 package com.elearning.elearning.module;
 
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +24,7 @@ public interface IModuleService {
     void removeModule(String id);
     Set<ModuleResponse> getAll();
 
-    Set<ModuleResponse> getAllByTraining(Training training);
+    Set<ModuleResponse> getAllByTraining(Speciality speciality);
 
     Set<ModuleResponse> getAllByStudent();
 }

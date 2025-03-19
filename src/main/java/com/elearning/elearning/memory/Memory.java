@@ -1,9 +1,9 @@
 package com.elearning.elearning.memory;
 
 import com.elearning.elearning.common.BaseEntity;
+import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.student.Student;
 import com.elearning.elearning.teacher.Teacher;
-import com.elearning.elearning.training.Training;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class Memory extends BaseEntity {
     private LocalDate date;
     private LocalTime time;
     @ManyToOne
-    private Training training;
+    private Speciality speciality;
     @ManyToOne
     private Teacher framer;
     @OneToMany

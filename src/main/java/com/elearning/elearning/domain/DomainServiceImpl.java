@@ -4,7 +4,6 @@ package com.elearning.elearning.domain;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.student.StudentRepository;
-import com.elearning.elearning.training.TrainingValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -99,7 +98,7 @@ public class DomainServiceImpl implements DomainService {
         domainRepository.findAll().forEach(domain -> {
             values.add(DomainValue.builder()
                     .name(domain.getName())
-                    .number(studentRepository.findAllByTrainingDomain(domain).isEmpty() ? NO: studentRepository.findAllByTrainingDomain(domain).size())
+                    .number(studentRepository.findAllBySpecialityMentionDomain(domain).isEmpty() ? NO: studentRepository.findAllBySpecialityMentionDomain(domain).size())
                     .build());
         });
 

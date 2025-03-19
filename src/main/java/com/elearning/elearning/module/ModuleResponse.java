@@ -1,13 +1,9 @@
 package com.elearning.elearning.module;
 
+import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.teacher.Teacher;
-import com.elearning.elearning.training.Training;
-import com.elearning.elearning.video.Video;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
-import java.math.BigDecimal;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +14,7 @@ import java.util.Set;
 public class ModuleResponse {
     private String id;
     private String name;
-    private Training training;
+    private Speciality speciality;
     private int numberOfVideo;
     private int numberOfPdf;
     private int numberOfPodcast;

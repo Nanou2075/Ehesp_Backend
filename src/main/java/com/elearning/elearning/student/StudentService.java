@@ -5,18 +5,13 @@ import com.elearning.elearning.account.Account;
 import com.elearning.elearning.account.AccountRepository;
 import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.common.PageResponse;
-import com.elearning.elearning.degree.Degree;
 import com.elearning.elearning.degree.DegreeService;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
-import com.elearning.elearning.exception.Response.Response;
-import com.elearning.elearning.exception.enums.Permission;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.document.DocumentService;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.verification.VerificationService;
-import com.elearning.elearning.video.Video;
-import com.elearning.elearning.video.VideoResponse;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -188,8 +183,8 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public Set<StudentResponse> getAllStudentByTraining(Training training) {
-        List<Student> students = studentRepository.findAllByTraining(training);
+    public Set<StudentResponse> getAllStudentByTraining(Speciality speciality) {
+        List<Student> students = studentRepository.findAllBySpeciality(speciality);
         if (students.isEmpty()) {
             throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));
         }

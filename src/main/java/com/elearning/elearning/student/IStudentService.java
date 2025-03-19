@@ -1,15 +1,13 @@
 package com.elearning.elearning.student;
 
 import com.elearning.elearning.common.PageResponse;
-import com.elearning.elearning.exception.Response.Response;
-import com.elearning.elearning.training.Training;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 @Transactional
@@ -24,5 +22,5 @@ public interface IStudentService {
     void deleteStudentById (String id);
     PageResponse getAllStudent(int page , int size);
 
-    Set<StudentResponse> getAllStudentByTraining(Training training);
+    Set<StudentResponse> getAllStudentByTraining(Speciality speciality);
 }
