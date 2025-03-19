@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
 import static com.elearning.elearning.training.TrainingMessage.*;
@@ -134,7 +135,7 @@ public class ModuleService implements IModuleService {
     public Set<ModuleResponse> getAll() {
         if (moduleRepository.findAll().isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(Optional.of(moduleRepository.findAll())
+        return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAll()))
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 
@@ -143,7 +144,7 @@ public class ModuleService implements IModuleService {
     public Set<ModuleResponse> getAllByTraining(Training training) {
         if (moduleRepository.findAllByTraining(training).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(Optional.of(moduleRepository.findAll())
+        return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAll()))
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 
@@ -152,13 +153,12 @@ public class ModuleService implements IModuleService {
     public Set<ModuleResponse> getAllByStudent() {
         if (moduleRepository.findAllByTraining(authenticationService.currentTraining()).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(Optional.of(moduleRepository.findAll())
-                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+        return convertToResponse(moduleRepository.findAllByTraining(authenticationService.currentTraining()));
     }
 
 
 
-    public Set<ModuleResponse> convertToResponse(List<Module> moduleList) {
+    public Set<ModuleResponse> convertToResponse(Set<Module> moduleList) {
         Set<ModuleResponse> moduleResponseList = new HashSet<>();
         moduleList.forEach(module -> {
             moduleResponseList.add(ModuleResponse.builder()
