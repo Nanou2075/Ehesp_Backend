@@ -19,7 +19,7 @@ public interface SpecialityResource {
     @PostMapping("domain")
     Response getTrainingByDomain(@RequestBody Domain domain);
 
-    @PostMapping("speciality")
+    @PostMapping("mention")
     Response getTrainingByMention(@RequestBody Mention mention);
 
     @GetMapping("{id}")

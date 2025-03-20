@@ -1,5 +1,6 @@
 package com.elearning.elearning.speciality;
 
+import com.elearning.elearning.mention.Mention;
 import com.elearning.elearning.teacher.Teacher;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -17,6 +18,7 @@ public class SpecialityResponse {
     private String name;
     private BigDecimal price;
     private Teacher coordinator;
+    private Mention mention;
 
 
 }

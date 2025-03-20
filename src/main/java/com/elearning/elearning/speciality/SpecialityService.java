@@ -48,10 +48,10 @@ public class SpecialityService implements ISpecialityService {
     @Override
     public Set<SpecialityValue> getTrainingStatical() {
         Set<SpecialityValue> values = new HashSet<>();
-        specialityRepository.findAll().forEach(training -> {
+        specialityRepository.findAll().forEach(speciality -> {
             values.add(SpecialityValue.builder()
-                    .name(training.getName())
-                    .number(studentRepository.findAllBySpeciality(training).isEmpty() ? NO: studentRepository.findAllBySpeciality(training).size())
+                    .name(speciality.getName())
+                    .number(studentRepository.findAllBySpeciality(speciality).isEmpty() ? NO: studentRepository.findAllBySpeciality(speciality).size())
                     .build());
 
 
@@ -108,12 +108,13 @@ return values;
 
     public Set<SpecialityResponse> convertToResponse(List<Speciality> specialityList) {
         Set<SpecialityResponse> specialityResponseList = new HashSet<>();
-        specialityList.forEach(training -> {
+        specialityList.forEach(speciality -> {
             specialityResponseList.add(SpecialityResponse.builder()
-                            .id(training.getId())
-                            .name(training.getName())
-                            .price(training.getPrice())
-                            .coordinator(training.getCoordinator())
+                            .id(speciality.getId())
+                            .name(speciality.getName())
+                            .price(speciality.getPrice())
+                            .mention(speciality.getMention())
+                            .coordinator(speciality.getCoordinator())
                     .build());
         });
         return specialityResponseList;
