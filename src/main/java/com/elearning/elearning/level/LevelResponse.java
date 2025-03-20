@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,8 +16,7 @@ import java.math.BigDecimal;
 public class LevelResponse {
     private String id;
     private String name;
-    private BigDecimal price;
-    private Teacher coordinator;
+    private LocalDate createdDate;
 
 
 }

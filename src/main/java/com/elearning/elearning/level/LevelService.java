@@ -46,9 +46,9 @@ public class LevelService implements ILevelService {
     @Override
     public Set<LevelValue> getTrainingStatical() {
         Set<LevelValue> values = new HashSet<>();
-        levelRepository.findAll().forEach(training -> {
+        levelRepository.findAll().forEach(level -> {
             values.add(LevelValue.builder()
-                    .name(training.getName())
+                    .name(level.getName())
                     .build());
 
 
@@ -105,10 +105,12 @@ return values;
 
     public Set<LevelResponse> convertToResponse(List<Level> levelList) {
         Set<LevelResponse> levelResponseList = new HashSet<>();
-        levelList.forEach(training -> {
+        levelList.forEach(level -> {
             levelResponseList.add(LevelResponse.builder()
-                            .id(training.getId())
-                            .name(training.getName())
+                            .id(level.getId())
+                            .name(level.getName())
+                            .createdDate(level.getCreatedDate())
+
 
                     .build());
         });

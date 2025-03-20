@@ -47,9 +47,9 @@ public class MentionService implements IMentionService {
     @Override
     public Set<MentionValue> getTrainingStatical() {
         Set<MentionValue> values = new HashSet<>();
-        mentionRepository.findAll().forEach(training -> {
+        mentionRepository.findAll().forEach(mention -> {
             values.add(MentionValue.builder()
-                    .name(training.getName())
+                    .name(mention.getName())
                     .build());
 
 
@@ -106,11 +106,12 @@ return values;
 
     public Set<MentionResponse> convertToResponse(List<Mention> mentionList) {
         Set<MentionResponse> mentionResponseList = new HashSet<>();
-        mentionList.forEach(training -> {
+        mentionList.forEach(mention -> {
             mentionResponseList.add(MentionResponse.builder()
-                            .id(training.getId())
-                            .name(training.getName())
-                            .price(training.getPrice())
+                            .id(mention.getId())
+                            .name(mention.getName())
+                            .createdDate(mention.getCreatedDate())
+                            .domain(mention.getDomain())
                     .build());
         });
         return mentionResponseList;
