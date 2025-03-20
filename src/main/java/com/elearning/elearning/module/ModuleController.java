@@ -63,8 +63,8 @@ private final LocalService localService;
     }
 
     @Override
-    public Response getAllModuleByTraining(Speciality speciality) {
-        return new Response(OK, moduleService.getAllByTraining(speciality));
+    public Response getAllModuleBySpeciality(Speciality speciality) {
+        return new Response(OK, moduleService.getAllBySpeciality(speciality));
     }
 
     @Override

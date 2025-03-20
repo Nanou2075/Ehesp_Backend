@@ -183,7 +183,7 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public Set<StudentResponse> getAllStudentByTraining(Speciality speciality) {
+    public Set<StudentResponse> getAllStudentBySpeciality(Speciality speciality) {
         List<Student> students = studentRepository.findAllBySpeciality(speciality);
         if (students.isEmpty()) {
             throw new NotFoundException(NO, localService.getMessage(ACCOUNT_EMPTY));

@@ -24,7 +24,7 @@ public interface IModuleService {
     void removeModule(String id);
     Set<ModuleResponse> getAll();
 
-    Set<ModuleResponse> getAllByTraining(Speciality speciality);
+    Set<ModuleResponse> getAllBySpeciality(Speciality speciality);
 
     Set<ModuleResponse> getAllByStudent();
 }

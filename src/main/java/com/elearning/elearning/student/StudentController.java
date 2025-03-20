@@ -56,7 +56,7 @@ public class StudentController implements IStudentResource {
     }
 
     @Override
-    public Response getAllStudentByTraining(Speciality speciality) {
-        return new Response(OK,studentService.getAllStudentByTraining(speciality));
+    public Response getAllStudentBySpeciality(Speciality speciality) {
+        return new Response(OK,studentService.getAllStudentBySpeciality(speciality));
     }
 }

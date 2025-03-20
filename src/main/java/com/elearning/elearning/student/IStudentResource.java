@@ -31,7 +31,7 @@ public interface IStudentResource {
     Response getAllStudent(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
                     @RequestParam(name = "size", defaultValue = "10", required = false) int size);
 
-    @PostMapping("training")
-    Response getAllStudentByTraining( @RequestBody Speciality speciality);
+    @PostMapping("speciality")
+    Response getAllStudentBySpeciality( @RequestBody Speciality speciality);
 
 }

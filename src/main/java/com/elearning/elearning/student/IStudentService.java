@@ -22,5 +22,5 @@ public interface IStudentService {
     void deleteStudentById (String id);
     PageResponse getAllStudent(int page , int size);
 
-    Set<StudentResponse> getAllStudentByTraining(Speciality speciality);
+    Set<StudentResponse> getAllStudentBySpeciality(Speciality speciality);
 }

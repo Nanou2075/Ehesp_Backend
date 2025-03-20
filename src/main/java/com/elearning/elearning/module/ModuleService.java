@@ -140,7 +140,7 @@ public class ModuleService implements IModuleService {
 
 
     @Override
-    public Set<ModuleResponse> getAllByTraining(Speciality speciality) {
+    public Set<ModuleResponse> getAllBySpeciality(Speciality speciality) {
         if (moduleRepository.findAllBySpeciality(speciality).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAll()))
