@@ -1,6 +1,7 @@
 package com.elearning.elearning.speciality;
 
 import com.elearning.elearning.domain.Domain;
+import com.elearning.elearning.level.Level;
 import com.elearning.elearning.mention.Mention;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public interface ISpecialityService {
     Set<SpecialityResponse> getAll();
 
     Set<SpecialityResponse> getAllByDomain(Domain domain);
+
+    Set<SpecialityResponse> getAllByLevel(Level level);
 
     Set<SpecialityResponse> getAllByMention(Mention mention);
 }

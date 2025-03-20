@@ -34,4 +34,6 @@ public interface IStudentResource {
     @PostMapping("speciality")
     Response getAllStudentBySpeciality( @RequestBody Speciality speciality);
 
+
+
 }
