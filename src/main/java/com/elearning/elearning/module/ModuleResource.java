@@ -16,7 +16,6 @@ public interface ModuleResource {
             @RequestParam(value = "videos",required = false) List<MultipartFile> videos,
                        @RequestParam(value = "books",required = false) List<MultipartFile> books,
                        @RequestParam(value = "podcasts",required = false) List<MultipartFile> podcasts,
-
                        @RequestPart Module module ) throws IOException;
 
     @PostMapping(value = "addFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

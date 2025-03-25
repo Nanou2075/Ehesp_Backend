@@ -3,6 +3,7 @@ package com.elearning.elearning.module;
 
 import com.elearning.elearning.book.BookRepository;
 import com.elearning.elearning.book.BookService;
+import com.elearning.elearning.cover.CoverRepository;
 import com.elearning.elearning.cover.CoverService;
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
@@ -42,6 +43,7 @@ public class ModuleService implements IModuleService {
     private final PodcastService podcastService;
     private final CoverService coverService;
     private final AuthenticationService authenticationService;
+    private final CoverRepository coverRepository;
 
 
     /**
@@ -56,14 +58,26 @@ public class ModuleService implements IModuleService {
                           List<MultipartFile> books,
                           List<MultipartFile> podcasts,
                           Module module) throws IOException {
-        if (moduleRepository.findByNameIgnoreCase(module.getName()).isPresent()){
-           throw new AlreadyExistException(NO,localService.getMessage(TRAINING_EXIT));}
+        if (moduleRepository.findByNameIgnoreCase(module.getName()).isPresent()) {
+            throw new AlreadyExistException(NO, localService.getMessage(TRAINING_EXIT));
+        }
         Module save = moduleRepository.save(module);
-        videoService.uploadVideo(videos,module);
-        bookService.uploadBook(books,module);
-        podcastService.uploadPodcast(podcasts,module);
-        coverService.uploadCover(cover,save);
+        if (videos != null)
+            videoService.uploadVideo(videos, module);
+
+        if (books != null)
+            bookService.uploadBook(books, module);
+
+        if (podcasts != null)
+            podcastService.uploadPodcast(podcasts, module);
+
+        if (podcasts != null)
+            coverService.uploadCover(cover, save);
+
     }
+
+
+
 
 
     /**
@@ -127,6 +141,40 @@ public class ModuleService implements IModuleService {
         moduleRepository.findById(id).ifPresentOrElse(moduleRepository::delete,()->{
             throw new NotFoundException(NO,localService.getMessage(TRAINING_NOT_FOUND));
         });
+        videoRepository.findAllByModuleId(id).forEach(video -> {
+            try {
+                videoService.deleteVideo(video.getId());
+                videoRepository.delete(video);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        podcastRepository.findAllByModuleId(id).forEach(podcast -> {
+            try {
+                podcastService.deletePodcast(podcast.getId());
+                podcastRepository.delete(podcast);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        bookRepository.findAllByModuleId(id).forEach(book -> {
+            try {
+                bookService.deleteBook(book.getId());
+                bookRepository.delete(book);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+      coverRepository.findByModuleId(id).ifPresent(cover -> {
+          try {
+              coverService.delete(cover.getFileName());
+          } catch (IOException e) {
+              throw new RuntimeException(e);
+          }
+          coverRepository.delete(cover);
+      });
+
 
     }
 

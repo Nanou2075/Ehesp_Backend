@@ -48,7 +48,8 @@ private final LocalService localService;
 
     @Override
     public Response removeModule(String id) {
-        return new Response(OK, moduleService.getModule(id));
+        moduleService.removeModule(id);
+        return new Response(OK,localService.getMessage(TRAINING_DELETE));
     }
 
     @Override
