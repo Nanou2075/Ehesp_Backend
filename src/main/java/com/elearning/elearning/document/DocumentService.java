@@ -112,7 +112,7 @@ public class DocumentService implements IDocumentService {
 
 
     public void  loadTeacherFile (MultipartFile file, Teacher teacher) throws IOException {
-        Path path = Path.of(FOLDER_BOOK_PATH);
+        Path path = Path.of(FOLDER_DOCUMENT_PATH);
         commService.folderChecking(path);
         String filePath=path+file.getOriginalFilename();
         documentRepository.findByTeacher(teacher).ifPresentOrElse(document -> {
@@ -145,7 +145,7 @@ public class DocumentService implements IDocumentService {
 
 
     public void  loadFile (MultipartFile file, Account account) throws IOException {
-        Path path = Path.of(FOLDER_BOOK_PATH);
+        Path path = Path.of(FOLDER_DOCUMENT_PATH);
         commService.folderChecking(path);
         String filePath=path+file.getOriginalFilename();
         documentRepository.findByAccount(account).ifPresentOrElse(document -> {
