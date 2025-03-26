@@ -71,7 +71,7 @@ public class ModuleService implements IModuleService {
         if (podcasts != null)
             podcastService.uploadPodcast(podcasts, module);
 
-        if (podcasts != null)
+        if (cover != null)
             coverService.uploadCover(cover, save);
 
     }
