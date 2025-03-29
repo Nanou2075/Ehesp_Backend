@@ -43,19 +43,6 @@ public class LevelService implements ILevelService {
 
 
 
-    @Override
-    public Set<LevelValue> getTrainingStatical() {
-        Set<LevelValue> values = new HashSet<>();
-        levelRepository.findAll().forEach(level -> {
-            values.add(LevelValue.builder()
-                    .name(level.getName())
-                    .build());
-
-
-        });
-
-return values;
-    }
 
 
     /**
@@ -80,6 +67,20 @@ return values;
     public Level getTraining(String id) {
         return levelRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND)));
+    }
+
+
+    @Override
+    public Set<LevelValue> getLevelStatical() {
+        Set<LevelValue> values = new HashSet<>();
+        levelRepository.findAll().forEach(level -> {
+            values.add(LevelValue.builder()
+                    .name(level.getName())
+                    .number(studentRepository.findAllBySpecialityMentionDomainLevel(level).isEmpty() ? NO: studentRepository.findAllBySpecialityMentionDomainLevel(level).size())
+                    .build());
+        });
+
+        return values;
     }
 
     /**

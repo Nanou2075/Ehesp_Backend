@@ -1,6 +1,7 @@
 package com.elearning.elearning.student;
 
 import com.elearning.elearning.domain.Domain;
+import com.elearning.elearning.level.Level;
 import com.elearning.elearning.speciality.Speciality;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ public interface StudentRepository extends JpaRepository<Student,String> {
     List<Student> findAllByAvailableTrue();
     List<Student> findAllBySpeciality(Speciality speciality);
     List<Student> findAllBySpecialityMentionDomain(Domain domain);
+    List<Student> findAllBySpecialityMentionDomainLevel(Level level);
 
 
 }

@@ -17,6 +17,7 @@ public interface LevelResource {
     @GetMapping("{id}")
     Response getTraining(@PathVariable String id );
 
+
     @GetMapping("all")
     Response getAllTraining();
     @GetMapping("statistical")

@@ -13,24 +13,24 @@ import static com.elearning.elearning.speciality.SpecialityMessage.*;
 @RestController
 @RequiredArgsConstructor
 public class LevelController implements LevelResource {
-private final ILevelService trainingService;
+private final ILevelService levelService;
 private final LocalService localService;
 
     @Override
     public Response addTraining(Level level) {
-        trainingService.addTraining(level);
+        levelService.addTraining(level);
         return new Response(OK,localService.getMessage(TRAINING_SUCCESS));
     }
 
     @Override
     public Response updateTraining(String id, Level level) {
-        trainingService.updateTraining(id, level);
+        levelService.updateTraining(id, level);
         return new Response(OK,localService.getMessage(TRAINING_UPDATE));
     }
 
     @Override
     public Response removeTraining(String id) {
-        trainingService.removeTraining(id);
+        levelService.removeTraining(id);
         return new Response(OK,localService.getMessage(TRAINING_DELETE));
     }
 
@@ -38,17 +38,18 @@ private final LocalService localService;
 
     @Override
     public Response getTraining(String id) {
-        return new Response(OK, trainingService.getTraining(id));
+        return new Response(OK, levelService.getTraining(id));
 
     }
 
+
     @Override
     public Response getAllTraining() {
-        return new Response(OK, trainingService.getAll());
+        return new Response(OK, levelService.getAll());
     }
 
     @Override
     public Response getTrainingStatical() {
-        return new Response(OK, trainingService.getTrainingStatical());
+        return new Response(OK, levelService.getLevelStatical());
     }
 }

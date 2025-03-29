@@ -10,9 +10,11 @@ import java.util.Set;
 @Service
 public interface ILevelService {
     void addTraining(Level level);
-    Set<LevelValue> getTrainingStatical();
     void updateTraining(String id, Level level);
     Level getTraining(String id);
+
+    Set<LevelValue> getLevelStatical();
+
     void removeTraining(String id);
     Set<LevelResponse> getAll();
 
