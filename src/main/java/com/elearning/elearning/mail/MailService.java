@@ -40,7 +40,7 @@ public class MailService {
                 , UTF_8.name());
         mimeMessageHelper.setFrom(username);
         mimeMessageHelper.setTo(request.getDestinationMail());
-        final String templateName = REGISTRATION_CONFIRMATION.getTemplate();
+        final String templateName = VALIDATION_CONFIRMATION.getTemplate();
         Map<String, Object> variables = new HashMap<>();
         variables.put("password", request.getPassword());
         variables.put("username", request.getUsername());

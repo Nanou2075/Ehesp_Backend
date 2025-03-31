@@ -9,7 +9,7 @@ import lombok.Getter;
 public enum MailTemplate {
     VERIFICATION_CONFIRMATION("verification-confirmation","Validation successfully processed"),
     REGISTRATION_CONFIRMATION("creation-email","Validation d'inscription "),
-    VALIDATION_CONFIRMATION("validation-email","Validation d'inscription ");
+    VALIDATION_CONFIRMATION("validation-email","Acceptation d'inscription ");
 
 
     private final String template;
