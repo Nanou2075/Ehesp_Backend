@@ -35,7 +35,7 @@ public class StudentController implements IStudentResource {
     @Override
     public Response validStudent(String id) {
         studentService.validStudentBy(id);
-        return new Response(OK,localService.getMessage(ACCOUNT_ACTIVATED));
+        return new Response(OK,localService.getMessage(ACCOUNT_SAVE));
     }
 
     @Override

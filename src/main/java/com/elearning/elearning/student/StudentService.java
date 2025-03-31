@@ -10,6 +10,7 @@ import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.i18n.LocalService;
 import com.elearning.elearning.document.DocumentService;
+import com.elearning.elearning.mail.MailService;
 import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.verification.VerificationService;
 import jakarta.mail.MessagingException;
@@ -45,6 +46,7 @@ public class StudentService implements IStudentService {
     private final DegreeService degreeService;
     private final CommService commService;
     private final ModelMapper modelMapper;
+    private final MailService mailService;
     private final VerificationService verificationService;
 
 
@@ -66,6 +68,8 @@ public class StudentService implements IStudentService {
         studentRepository.save(student);
         documentService.uploadCV(cv, account);
         degreeService.uploadDegree(degree, account);
+        mailService.sendRegisterMail(account.getMail());
+
     }
 
 

@@ -18,6 +18,7 @@ import java.util.Map;
 
 
 import static com.elearning.elearning.mail.MailTemplate.REGISTRATION_CONFIRMATION;
+import static com.elearning.elearning.mail.MailTemplate.VALIDATION_CONFIRMATION;
 import static com.elearning.elearning.messages.MailValue.username;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -35,7 +36,7 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper
                 = new MimeMessageHelper(
-                        mimeMessage,MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED
+                mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED
                 , UTF_8.name());
         mimeMessageHelper.setFrom(username);
         mimeMessageHelper.setTo(request.getDestinationMail());
@@ -47,19 +48,44 @@ public class MailService {
         Context context = new Context();
 
         context.setVariables(variables);
-        mimeMessageHelper.setSubject(REGISTRATION_CONFIRMATION.getSubject());
+        mimeMessageHelper.setSubject(VALIDATION_CONFIRMATION.getSubject());
         try {
-            String htmlTemplate = templateEngine.process(templateName,context);
+            String htmlTemplate = templateEngine.process(templateName, context);
             mimeMessageHelper.setText(htmlTemplate, true);
             mimeMessageHelper.setTo(request.getDestinationMail());
             mailSender.send(mimeMessage);
-            log.info(String.format("INFO - Email successfully send to %s with template %s",request.getDestinationMail(),templateName));
-        }catch (MessagingException e){
-            log.warn("WARNING - Email send to %s failed",request.getDestinationMail());
+            log.info(String.format("INFO - Email successfully send to %s with template %s", request.getDestinationMail(), templateName));
+        } catch (MessagingException e) {
+            log.warn("WARNING - Email send to %s failed", request.getDestinationMail());
         }
+    }
 
 
 
+        @Async
+        public void sendRegisterMail (String email) throws MessagingException {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper
+                    = new MimeMessageHelper(
+                    mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED
+                    , UTF_8.name());
+            mimeMessageHelper.setFrom(username);
+            mimeMessageHelper.setTo(email);
+            final String templateName = REGISTRATION_CONFIRMATION.getTemplate();
+            mimeMessageHelper.setSubject(REGISTRATION_CONFIRMATION.getSubject());
+            try {
+                Context context = new Context();
+                String htmlTemplate = templateEngine.process(templateName, context);
+                mimeMessageHelper.setText(htmlTemplate, true);
+                mimeMessageHelper.setTo(email);
+                mailSender.send(mimeMessage);
+                log.info(String.format("INFO - Email successfully send to %s with template %s",email, templateName));
+            } catch (MessagingException e) {
+                log.warn("WARNING - Email send to %s failed", email);
+            }
+
+
+        }
     }
 
 
@@ -67,4 +93,3 @@ public class MailService {
 
 
 
-}
