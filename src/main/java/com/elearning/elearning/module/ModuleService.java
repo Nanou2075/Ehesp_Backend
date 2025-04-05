@@ -106,7 +106,7 @@ public class ModuleService implements IModuleService {
 
     /**
      *
-     * @param id permit to get the Module
+     * @param id permit to get the Examen
      * @param module the value to set the current module data
      */
 
@@ -121,8 +121,8 @@ public class ModuleService implements IModuleService {
 
     /**
      *
-     * @param id permit to get the Module
-     * @return  Module
+     * @param id permit to get the Examen
+     * @return  Examen
      */
     @Override
     public Module getModule(String id) {
@@ -133,7 +133,7 @@ public class ModuleService implements IModuleService {
 
     /**
      *
-     * @param id  permit to get the Module and delete
+     * @param id  permit to get the Examen and delete
      */
 
     @Override
@@ -191,7 +191,15 @@ public class ModuleService implements IModuleService {
     public Set<ModuleResponse> getAllBySpeciality(Speciality speciality) {
         if (moduleRepository.findAllBySpeciality(speciality).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAll()))
+        return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAllBySpeciality(speciality)))
+                .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
+    }
+
+    @Override
+    public Set<ModuleResponse> getAllByStudentSpeciality() {
+        if (moduleRepository.findAllBySpeciality(authenticationService.currentStudent().getSpeciality()).isEmpty())
+            throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
+        return convertToResponse(Optional.of(new HashSet<>(moduleRepository.findAllBySpeciality(authenticationService.currentStudent().getSpeciality())))
                 .orElseThrow(() -> new NotFoundException(NO, localService.getMessage(TRAINING_NOT_FOUND))));
     }
 

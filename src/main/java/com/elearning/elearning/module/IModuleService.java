@@ -26,5 +26,7 @@ public interface IModuleService {
 
     Set<ModuleResponse> getAllBySpeciality(Speciality speciality);
 
+    Set<ModuleResponse> getAllByStudentSpeciality();
+
     Set<ModuleResponse> getAllByStudent();
 }

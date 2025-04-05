@@ -64,7 +64,7 @@ return values;
 
     /**
      *
-     * @param id permit to get the Module
+     * @param id permit to get the Examen
      * @param speciality the value to set the current speciality data
      */
 
@@ -77,8 +77,8 @@ return values;
 
     /**
      *
-     * @param id permit to get the Module
-     * @return  Module
+     * @param id permit to get the Examen
+     * @return  Examen
      */
     @Override
     public Speciality getTraining(String id) {
@@ -88,7 +88,7 @@ return values;
 
     /**
      *
-     * @param id  permit to get the Module and delete
+     * @param id  permit to get the Examen and delete
      */
 
     @Override

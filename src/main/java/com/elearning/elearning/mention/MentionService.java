@@ -61,7 +61,7 @@ return values;
 
     /**
      *
-     * @param id permit to get the Module
+     * @param id permit to get the Examen
      * @param mention the value to set the current mention data
      */
 
@@ -74,8 +74,8 @@ return values;
 
     /**
      *
-     * @param id permit to get the Module
-     * @return  Module
+     * @param id permit to get the Examen
+     * @return  Examen
      */
     @Override
     public Mention getTraining(String id) {
@@ -85,7 +85,7 @@ return values;
 
     /**
      *
-     * @param id  permit to get the Module and delete
+     * @param id  permit to get the Examen and delete
      */
 
     @Override

@@ -47,7 +47,7 @@ public class LevelService implements ILevelService {
 
     /**
      *
-     * @param id permit to get the Module
+     * @param id permit to get the Examen
      * @param level the value to set the current level data
      */
 
@@ -60,8 +60,8 @@ public class LevelService implements ILevelService {
 
     /**
      *
-     * @param id permit to get the Module
-     * @return  Module
+     * @param id permit to get the Examen
+     * @return  Examen
      */
     @Override
     public Level getTraining(String id) {
@@ -85,7 +85,7 @@ public class LevelService implements ILevelService {
 
     /**
      *
-     * @param id  permit to get the Module and delete
+     * @param id  permit to get the Examen and delete
      */
 
     @Override

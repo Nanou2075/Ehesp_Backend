@@ -41,4 +41,7 @@ public interface ModuleResource {
 
     @GetMapping("student")
     Response getAllModuleByStudent();
+
+    @GetMapping("student/speciality")
+    Response getAllModuleByStudentBySpeciality();
 }

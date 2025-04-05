@@ -72,4 +72,9 @@ private final LocalService localService;
     public Response getAllModuleByStudent() {
         return new  Response(OK, moduleService.getAllByStudent());
     }
+
+    @Override
+    public Response getAllModuleByStudentBySpeciality() {
+        return new  Response(OK, moduleService.getAllByStudentSpeciality());
+    }
 }
