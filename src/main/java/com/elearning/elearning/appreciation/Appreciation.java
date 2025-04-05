@@ -20,14 +20,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Appreciation extends BaseEntity {
-    private LocalDate date;
-    private LocalTime time;
-    @ManyToOne
-    private Speciality speciality;
-    private String framer;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String>  jury;
+    private String description;
+    private String mention;
     @OneToOne
     private Student student;
-    private  boolean valid ;
 }

@@ -92,12 +92,7 @@ public class AppreciationServiceImpl implements AppreciationService {
         if (memories.isEmpty()) {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }
-        memories.forEach(memory -> {
-            if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
-                memory.setValid(true);
-                appreciationRepository.save(memory);
-            }
-        });
+
         return new Response(OK, memories);
     }
 
@@ -110,12 +105,6 @@ recuperation de la liste   des sections
         if (memories.isEmpty()) {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }
-        memories.forEach(memory -> {
-            if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
-                memory.setValid(true);
-                appreciationRepository.save(memory);
-            }
-        });
         return new Response(OK, memories);
     }
 }
