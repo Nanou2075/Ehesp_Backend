@@ -60,7 +60,7 @@ public class AdminService implements IAdminService {
         Admin admin = modelMapper.map(request, Admin.class);
         Account account = modelMapper.map(admin, Account.class);
         account.setPassword(passwordEncoder.encode(password));
-        account.setPermission(Permission.ADMIN);
+        account.setPermission(request.getPermission());
         account.setAvailable(true);
         account.setAttempt(T);
         account.setNotLocked(true);
