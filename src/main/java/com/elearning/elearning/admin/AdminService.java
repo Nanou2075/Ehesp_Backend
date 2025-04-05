@@ -21,11 +21,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static com.elearning.elearning.exception.Response.Security.NO;
+import static com.elearning.elearning.exception.Response.Security.T;
 import static com.elearning.elearning.messages.AccountMessage.*;
 
 
@@ -59,6 +61,11 @@ public class AdminService implements IAdminService {
         Account account = modelMapper.map(admin, Account.class);
         account.setPassword(passwordEncoder.encode(password));
         account.setPermission(Permission.ADMIN);
+        account.setAvailable(true);
+        account.setAttempt(T);
+        account.setNotLocked(true);
+        account.setAttemptDateExp(Instant.now());
+        account.setActivated(true);
         accountRepository.save(account);
         adminRepository.save(admin);
         verificationService.verificationCode(account,password);
