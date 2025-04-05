@@ -21,5 +21,6 @@ import java.time.LocalDate;
 public class Calendar extends BaseEntity {
     private int value;
     private String description;
-    private LocalDate date;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
 }
