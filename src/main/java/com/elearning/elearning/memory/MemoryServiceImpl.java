@@ -6,6 +6,7 @@ import com.elearning.elearning.account.AccountRepository;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.security.authentication.AuthenticationService;
+import com.elearning.elearning.speciality.Speciality;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -92,6 +93,27 @@ public class MemoryServiceImpl implements MemoryService {
     @Override
     public Response getAll() {
         List<Memory> memories = memoryRepository.findAll(Sort.by("createdDate").ascending());
+        if (memories.isEmpty()) {
+            throw new NotFoundException(NO, MEMORY_EMPTY);
+        }
+        memories.forEach(memory -> {
+            if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
+                memory.setValid(true);
+                memoryRepository.save(memory);
+                Account account = accountRepository.findAccountById(memory.getStudent().getId());
+                account.setActivated(false);
+                accountRepository.save(account);
+
+
+
+            }
+        });
+        return new Response(OK, memories);
+    }
+
+    @Override
+    public Response getAllBySpeciality(Speciality speciality) {
+        List<Memory> memories = memoryRepository.findByStudentSpeciality(speciality);
         if (memories.isEmpty()) {
             throw new NotFoundException(NO, MEMORY_EMPTY);
         }

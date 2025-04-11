@@ -3,6 +3,7 @@ package com.elearning.elearning.memory;
 
 import com.elearning.elearning.domain.DomainRequest;
 import com.elearning.elearning.exception.Response.Response;
+import com.elearning.elearning.speciality.Speciality;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,9 @@ public interface MemoryResource {
     Response getAll();
     @GetMapping("student")
     Response getStudentMemory();
+
+    @PostMapping("speciality")
+    Response getStudentMemoryBySpeciality(@RequestBody Speciality speciality);
 
     @DeleteMapping("{id}")
     Response delete(@PathVariable String id);

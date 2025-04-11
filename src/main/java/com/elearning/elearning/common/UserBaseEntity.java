@@ -1,5 +1,6 @@
 package com.elearning.elearning.common;
 import com.elearning.elearning.exception.enums.Permission;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -61,6 +62,7 @@ public abstract class UserBaseEntity implements UserDetails {
     private boolean isNotLocked;
 
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(this.permission.name()));
