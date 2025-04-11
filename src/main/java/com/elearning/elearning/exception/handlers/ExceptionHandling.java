@@ -1,9 +1,8 @@
-package com.elearning.elearning.handlers;
+package com.elearning.elearning.exception.handlers;
 
 
 import com.elearning.elearning.exception.AlreadyExistException;
 import com.elearning.elearning.exception.NotFoundException;
-import com.elearning.elearning.exception.handlers.HttpResponse;
 import com.elearning.elearning.i18n.LocalService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.mail.MessagingException;

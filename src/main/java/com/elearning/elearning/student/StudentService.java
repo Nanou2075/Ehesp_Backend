@@ -97,7 +97,6 @@ public class StudentService implements IStudentService {
                     Account account = accountRepository.findByPhoneOrMailIgnoreCase(student.getPhone(), student.getMail());
                     account.setPassword(passwordEncoder.encode(password));
                     account.setAvailable(true);
-                    account.setActivated(true);
                     account.setAttempt(T);
                     account.setNotLocked(true);
                     account.setAttemptDateExp(Instant.now());

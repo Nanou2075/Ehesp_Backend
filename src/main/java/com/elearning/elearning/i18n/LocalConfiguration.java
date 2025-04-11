@@ -23,7 +23,6 @@ public class LocalConfiguration  implements WebMvcConfigurer {
     public AcceptHeaderLocaleResolver acceptHeaderLocaleResolver() {
         AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
         localeResolver.setDefaultLocale(Locale.ENGLISH);
-
         return localeResolver;
     }
 

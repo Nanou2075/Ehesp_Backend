@@ -1,6 +1,8 @@
 package com.elearning.elearning.memory;
 
 
+import com.elearning.elearning.account.Account;
+import com.elearning.elearning.account.AccountRepository;
 import com.elearning.elearning.exception.NotFoundException;
 import com.elearning.elearning.exception.Response.Response;
 import com.elearning.elearning.security.authentication.AuthenticationService;
@@ -26,6 +28,7 @@ import static com.elearning.elearning.memory.MemoryMessage.*;
 public class MemoryServiceImpl implements MemoryService {
     private final MemoryRepository memoryRepository;
     private final AuthenticationService authenticationService;
+    private  final AccountRepository accountRepository;
 
 
 
@@ -96,6 +99,12 @@ public class MemoryServiceImpl implements MemoryService {
             if (memory.getDate().isEqual(LocalDate.now()) && memory.getTime().isBefore(LocalTime.now())) {
                 memory.setValid(true);
                 memoryRepository.save(memory);
+                Account account = accountRepository.findAccountById(memory.getStudent().getId());
+                account.setActivated(false);
+                accountRepository.save(account);
+
+
+
             }
         });
         return new Response(OK, memories);
