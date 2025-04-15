@@ -17,4 +17,8 @@ public interface ExamService {
 
     Response getAll();
 
+    /*
+    recuperation de la liste   des sections
+    */
+    Response getAllByStudent();
 }

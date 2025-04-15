@@ -161,7 +161,7 @@ public class BookService implements IBookService {
     @Override
     public Response getAllByModule() {
         Set<Book> modules = new HashSet<>();
-        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentTraining());
+        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentSpeciality());
         if (allModule.isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         allModule.forEach(module -> {

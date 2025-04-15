@@ -169,7 +169,7 @@ public class PodcastService implements IPodcastService {
     @Override
     public Response getAllByModule() {
         Set<Podcast> podcasts = new HashSet<>();
-        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentTraining());
+        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentSpeciality());
         if (allModule.isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
         allModule.forEach(module -> {

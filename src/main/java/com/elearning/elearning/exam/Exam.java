@@ -2,6 +2,7 @@ package com.elearning.elearning.exam;
 
 import com.elearning.elearning.common.BaseEntity;
 import com.elearning.elearning.module.Module;
+import com.elearning.elearning.speciality.Speciality;
 import com.elearning.elearning.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -20,9 +21,12 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Entity
 public class Exam extends BaseEntity {
-    private LocalDate date;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
     private LocalTime time;
     private String description;
     @ManyToOne
     private Module module;
+    @ManyToOne
+    private Speciality speciality;
 }

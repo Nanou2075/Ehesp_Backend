@@ -72,7 +72,7 @@ public class AuthenticationService implements UserDetailsService {
     }
 
 
-    public Speciality currentTraining() throws NotFoundException {
+    public Speciality currentSpeciality() throws NotFoundException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String principal = authentication.getName();
         return Optional.ofNullable(studentRepository.findStudentById(principal).getSpeciality())

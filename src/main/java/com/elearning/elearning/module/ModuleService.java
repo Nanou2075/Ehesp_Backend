@@ -206,9 +206,9 @@ public class ModuleService implements IModuleService {
 
     @Override
     public Set<ModuleResponse> getAllByStudent() {
-        if (moduleRepository.findAllBySpeciality(authenticationService.currentTraining()).isEmpty())
+        if (moduleRepository.findAllBySpeciality(authenticationService.currentSpeciality()).isEmpty())
             throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
-        return convertToResponse(moduleRepository.findAllBySpeciality(authenticationService.currentTraining()));
+        return convertToResponse(moduleRepository.findAllBySpeciality(authenticationService.currentSpeciality()));
     }
 
 

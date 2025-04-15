@@ -19,6 +19,8 @@ public interface ExamResource {
     @GetMapping("all")
     Response getAll();
 
+    @GetMapping("student")
+    Response getAllByStudent();
 
     @DeleteMapping("{id}")
     Response delete(@PathVariable String id);

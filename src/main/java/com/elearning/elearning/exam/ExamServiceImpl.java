@@ -23,6 +23,7 @@ import static com.elearning.elearning.note.NoteMessage.*;
 @Transactional
 public class ExamServiceImpl implements ExamService {
     private final ExamRepository examRepository;
+    private final AuthenticationService authenticationService;
 
 
 
@@ -86,6 +87,18 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public Response getAll() {
         List<Exam> exams = examRepository.findAll(Sort.by("createdDate").ascending());
+        if (exams.isEmpty()) {
+            throw new NotFoundException(NO, NOTE_EMPTY);
+        }
+        return new Response(OK, exams);
+    }
+
+    /*
+recuperation de la liste   des sections
+*/
+    @Override
+    public Response getAllByStudent() {
+        List<Exam> exams = examRepository.findBySpeciality(authenticationService.currentSpeciality());
         if (exams.isEmpty()) {
             throw new NotFoundException(NO, NOTE_EMPTY);
         }

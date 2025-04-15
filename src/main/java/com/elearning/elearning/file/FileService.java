@@ -1,7 +1,6 @@
 package com.elearning.elearning.file;
 
 
-import com.elearning.elearning.book.Book;
 import com.elearning.elearning.common.CommService;
 import com.elearning.elearning.cover.CoverRepository;
 import com.elearning.elearning.exception.NotFoundException;
@@ -12,11 +11,8 @@ import com.elearning.elearning.module.ModuleRepository;
 import com.elearning.elearning.security.authentication.AuthenticationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -146,7 +142,7 @@ public class FileService implements IFileService {
     @Override
     public Response getAllByModule() {
         Set<File> files = new HashSet<>();
-        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentTraining());
+        Set<Module> allModule = moduleRepository.findAllBySpeciality(authenticationService.currentSpeciality());
         if (allModule.isEmpty())
                 throw new NotFoundException(NO,localService.getMessage(TRAINING_EMPTY));
            allModule.forEach(module -> {

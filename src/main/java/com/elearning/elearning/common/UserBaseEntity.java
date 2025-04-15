@@ -38,11 +38,9 @@ public abstract class UserBaseEntity implements UserDetails {
 
     private String phone;
 
-
     private String password;
 
     private String fullName;
-
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -61,7 +59,6 @@ public abstract class UserBaseEntity implements UserDetails {
     private boolean isActivated;
     private boolean isNotLocked;
 
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,7 +69,6 @@ public abstract class UserBaseEntity implements UserDetails {
     public String getUsername() {
         return getMail();
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

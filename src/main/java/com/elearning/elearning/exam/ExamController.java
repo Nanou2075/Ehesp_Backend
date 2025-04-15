@@ -29,6 +29,10 @@ public class ExamController implements ExamResource {
     public Response getAll() {
         return examService.getAll();
     }
+    @Override
+    public Response getAllByStudent() {
+        return examService.getAllByStudent();
+    }
 
 
     @Override
